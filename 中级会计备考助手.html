@@ -955,7 +955,7 @@ function renderBulkAdd(){
     <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
       <button class="btn" style="flex:1;min-width:120px" onclick="bulkParse()">🔍 解析预览</button>
       <button class="btn ghost sm" onclick="$('#bText').value=BULK_SAMPLE;bulkParse()">填入示例</button>
-      <label class="btn ghost sm" style="text-align:center">📁 导入JSON<input type="file" accept=".json" style="display:none" onchange="bulkImportJson(event)"></label>
+      <label class="btn ghost sm" style="text-align:center">📁 导入文件(.txt/.json)<input type="file" accept=".json,.txt" style="display:none" onchange="bulkImportFile(event)"></label>
     </div>
     <div id="bulkPreview"></div>
     <details style="margin-top:16px"><summary style="cursor:pointer;color:var(--primary)">📖 查看完整格式说明</summary>
@@ -994,10 +994,19 @@ function bulkConfirm(){
   toast("✅ 成功导入 "+bulkParsed.length+" 道题");
   bulkParsed=[]; $("#bText").value=""; renderAdd();
 }
-function bulkImportJson(e){
-  const f=e.target.files[0]; if(!f)return; const r=new FileReader();
-  r.onload=()=>{ try{
-    let arr=JSON.parse(r.result); if(!Array.isArray(arr))throw 0;
+function bulkImportFile(e){
+  const f=e.target.files[0]; if(!f)return;
+  const isTxt=/\.txt$/i.test(f.name);
+  const r=new FileReader();
+  r.onload=()=>{
+    if(isTxt){ $("#bText").value=r.result; bulkParse(); toast("已读入文本，请确认导入"); return; }
+    bulkImportJsonText(r.result);
+  };
+  r.readAsText(f);
+}
+function bulkImportJsonText(content){
+  try{
+    let arr=JSON.parse(content); if(!Array.isArray(arr))throw 0;
     const defSubj=$("#bSubj").value; let n=0;
     arr.forEach((q,i)=>{
       if(!q.stem||!q.answer)return;
@@ -1009,8 +1018,7 @@ function bulkImportJson(e){
         answer:q.answer,explain:q.explain||""}); n++;
     });
     saveState(); toast("✅ 从JSON导入 "+n+" 道题"); renderAdd();
-  }catch(err){ toast("JSON格式错误"); } };
-  r.readAsText(f);
+  }catch(err){ toast("JSON格式错误"); }
 }
 
 function subjKey(s){
