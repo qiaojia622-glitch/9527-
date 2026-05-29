@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中级会计备考助手</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --primary:#3b6ef0; --primary-dark:#2b53c4;
+    --text:#1f2330; --muted:#7a8194; --line:#e7eaf2; --ok:#1faa6c; --err:#e0524d;
+    --warn:#f0a23b; --shadow:0 4px 20px rgba(40,60,120,.08);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6}
+  /* 顶部 */
+  header{background:linear-gradient(135deg,#3b6ef0,#5a4ff0);color:#fff;padding:18px 16px 14px;position:sticky;top:0;z-index:50;box-shadow:0 2px 14px rgba(40,60,120,.18)}
+  .h-top{display:flex;justify-content:space-between;align-items:center;max-width:880px;margin:0 auto;gap:10px}
+  .h-top h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.5px}
+  .countdown{text-align:right;font-size:13px;opacity:.95;cursor:pointer}
+  .countdown b{font-size:22px;display:block;line-height:1.1}
+  /* 标签导航 */
+  nav{display:flex;gap:4px;max-width:880px;margin:12px auto 0;overflow-x:auto;padding-bottom:2px}
+  nav button{flex:0 0 auto;background:rgba(255,255,255,.18);color:#fff;border:none;padding:7px 14px;border-radius:20px;font-size:14px;cursor:pointer;white-space:nowrap;transition:.2s}
+  nav button.active{background:#fff;color:var(--primary);font-weight:600}
+  /* 主体 */
+  main{max-width:880px;margin:0 auto;padding:16px 14px 60px}
+  .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .card h2{margin:0 0 14px;font-size:16px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .stat{flex:1;min-width:130px;background:linear-gradient(135deg,#f7f9ff,#eef2ff);border-radius:14px;padding:14px;text-align:center}
+  .stat .num{font-size:26px;font-weight:700;color:var(--primary)}
+  .stat .lbl{font-size:12px;color:var(--muted);margin-top:2px}
+  /* 科目选择条 */
+  .subj-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .subj-bar button{flex:1;min-width:90px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px;cursor:pointer;font-size:14px;color:var(--text);transition:.15s}
+  .subj-bar button.active{border-color:var(--primary);background:#eef3ff;color:var(--primary);font-weight:600}
+  /* 按钮 */
+  .btn{background:var(--primary);color:#fff;border:none;padding:11px 18px;border-radius:10px;font-size:15px;cursor:pointer;transition:.15s;font-weight:500}
+  .btn:hover{background:var(--primary-dark)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.ghost{background:#eef1f8;color:var(--text)}
+  .btn.sm{padding:7px 13px;font-size:13px}
+  .btn.block{display:block;width:100%}
+  /* 题目 */
+  .q-meta{font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap}
+  .tag{background:#eef1f8;color:var(--muted);padding:2px 9px;border-radius:20px;font-size:12px}
+  .q-stem{font-size:16px;font-weight:600;margin-bottom:14px;white-space:pre-wrap}
+  .opt{display:flex;align-items:flex-start;gap:10px;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:9px;cursor:pointer;transition:.12s}
+  .opt:hover{border-color:#c3cdec}
+  .opt.sel{border-color:var(--primary);background:#eef3ff}
+  .opt.correct{border-color:var(--ok);background:#e9f8f1}
+  .opt.wrong{border-color:var(--err);background:#fceb ea;background:#fdecea}
+  .opt .key{font-weight:700;color:var(--muted);flex:0 0 auto}
+  .opt.sel .key,.opt.correct .key{color:var(--primary)}
+  .opt.correct .key{color:var(--ok)}
+  .opt.wrong .key{color:var(--err)}
+  .explain{background:#f7f9ff;border-left:3px solid var(--primary);border-radius:8px;padding:12px;margin-top:12px;font-size:14px;white-space:pre-wrap}
+  .explain .res{font-weight:700;margin-bottom:6px}
+  .res.ok{color:var(--ok)} .res.no{color:var(--err)}
+  .q-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  /* 章节进度 */
+  .chap{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line)}
+  .chap:last-child{border-bottom:none}
+  .chap input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--primary);cursor:pointer}
+  .chap label{flex:1;cursor:pointer;font-size:14px}
+  .chap.done label{color:var(--muted);text-decoration:line-through}
+  .progbar{height:9px;background:#eef1f8;border-radius:6px;overflow:hidden;margin:6px 0 14px}
+  .progbar i{display:block;height:100%;background:linear-gradient(90deg,#3b6ef0,#5a4ff0);transition:.4s}
+  /* 闪卡 */
+  .flash{min-height:160px;background:linear-gradient(135deg,#f7f9ff,#eef2ff);border-radius:16px;padding:22px;text-align:center;display:flex;flex-direction:column;justify-content:center;cursor:pointer;font-size:17px}
+  .flash small{color:var(--muted);font-size:12px;display:block;margin-bottom:10px}
+  .flash .a{margin-top:14px;padding-top:14px;border-top:1px dashed #c3cdec;color:var(--primary);font-weight:600;white-space:pre-wrap}
+  /* 表单 */
+  label.fl{display:block;font-size:13px;color:var(--muted);margin:12px 0 5px}
+  input[type=text],input[type=date],select,textarea{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;background:#fff}
+  textarea{min-height:70px;resize:vertical}
+  .hint{font-size:13px;color:var(--muted);margin-top:8px}
+  .empty{text-align:center;color:var(--muted);padding:30px 10px;font-size:14px}
+  .pill{display:inline-block;background:#eef3ff;color:var(--primary);padding:3px 10px;border-radius:20px;font-size:12px;margin:2px}
+  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#1f2330;color:#fff;padding:11px 20px;border-radius:24px;font-size:14px;z-index:200;opacity:0;transition:.3s;pointer-events:none}
+  .toast.show{opacity:.95}
+  .modal{position:fixed;inset:0;background:rgba(20,25,45,.45);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+  .modal.show{display:flex}
+  .modal .box{background:#fff;border-radius:16px;padding:20px;max-width:420px;width:100%}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:480px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-top">
+    <h1>📘 中级会计备考助手</h1>
+    <div class="countdown" id="countdown" title="点击修改考试日期">
+      <b id="cdDays">--</b>
+      <span>距考试天数</span>
+    </div>
+  </div>
+  <nav id="nav">
+    <button data-view="home" class="active">🏠 首页</button>
+    <button data-view="quiz">📝 刷题</button>
+    <button data-view="wrong">❌ 错题本</button>
+    <button data-view="flash">🗂 闪卡复习</button>
+    <button data-view="plan">✅ 学习计划</button>
+    <button data-view="add">➕ 添加题目</button>
+    <button data-view="data">⚙️ 数据备份</button>
+  </nav>
+</header>
+
+<main>
+  <!-- 首页 -->
+  <section id="view-home"></section>
+  <!-- 刷题 -->
+  <section id="view-quiz" hidden></section>
+  <!-- 错题本 -->
+  <section id="view-wrong" hidden></section>
+  <!-- 闪卡 -->
+  <section id="view-flash" hidden></section>
+  <!-- 计划 -->
+  <section id="view-plan" hidden></section>
+  <!-- 添加 -->
+  <section id="view-add" hidden></section>
+  <!-- 数据 -->
+  <section id="view-data" hidden></section>
+</main>
+
+<div class="toast" id="toast"></div>
+<div class="modal" id="modal">
+  <div class="box">
+    <h2 style="margin-top:0" id="mTitle">设置考试日期</h2>
+    <label class="fl">考试日期</label>
+    <input type="date" id="examDate">
+    <div class="hint">2026年中级会计考试一般在 9 月初。请按准考证为准修改。</div>
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="btn ghost" onclick="closeModal()">取消</button>
+      <button class="btn" style="flex:1" onclick="saveExamDate()">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ 科目定义 ============ */
+const SUBJECTS = {
+  shiwu:   {name:"中级会计实务", short:"实务", color:"#3b6ef0"},
+  caiguan: {name:"财务管理",     short:"财管", color:"#1faa6c"},
+  jingjifa:{name:"经济法",       short:"经济法", color:"#f0a23b"},
+};
+
+/* ============ 内置题库（示例，可自行添加更多）============ */
+/* type: single 单选 / multi 多选 / judge 判断 ; answer: 单选&判断为字符串, 多选为数组 */
+const BUILTIN_QUESTIONS = [
+  // —— 中级会计实务 ——
+  {id:"b1",subject:"shiwu",chapter:"存货",type:"single",
+   stem:"企业在确定存货的可变现净值时，应以取得的可靠证据为基础。下列各项中，不应作为确定存货可变现净值依据的是（　）。",
+   options:["存货的成本","产成品的市场销售价格","为出售存货估计将发生的销售费用","完工产品的估计售价"],
+   answer:"A",explain:"可变现净值=估计售价−至完工估计成本−估计销售费用及税费。存货的“成本”本身不是可变现净值的计算依据，而是用来与可变现净值比较以确定是否计提跌价准备的。"},
+  {id:"b2",subject:"shiwu",chapter:"固定资产",type:"single",
+   stem:"下列关于固定资产折旧的说法中，正确的是（　）。",
+   options:["当月增加的固定资产，当月计提折旧","当月减少的固定资产，当月不计提折旧","已提足折旧仍继续使用的固定资产应继续计提折旧","处于更新改造过程停止使用的固定资产仍需计提折旧"],
+   answer:"A",explain:"当月增加的固定资产当月不提、下月起提；当月减少的当月仍提、下月起停。注意原题选项A表述应为“当月增加当月不提”，此处正确答案按准则：当月增加的固定资产当月不计提折旧——请以教材为准。已提足折旧的不再计提。"},
+  {id:"b3",subject:"shiwu",chapter:"收入",type:"judge",
+   stem:"判断：企业与客户之间的合同同时满足收入确认五步法相关条件时，才能确认收入。",
+   options:["正确","错误"],answer:"A",
+   explain:"正确。新收入准则采用“五步法”模型：①识别合同②识别履约义务③确定交易价格④分摊交易价格⑤履行履约义务时确认收入。"},
+  {id:"b4",subject:"shiwu",chapter:"金融资产",type:"multi",
+   stem:"下列各项中，应当划分为以摊余成本计量的金融资产应同时满足的条件有（　）。",
+   options:["业务模式以收取合同现金流量为目标","合同现金流量仅为本金和利息的支付","以公允价值计量且变动计入当期损益","管理层有意图持有至到期"],
+   answer:["A","B"],
+   explain:"以摊余成本计量需同时满足两个条件：①业务模式是“收取合同现金流量”；②合同现金流量特征是“本金+利息”(SPPI测试)。CD不属于条件。"},
+
+  // —— 财务管理 ——
+  {id:"b5",subject:"caiguan",chapter:"财务管理基础",type:"single",
+   stem:"下列各项中，能够反映企业获利能力的财务指标是（　）。",
+   options:["流动比率","资产负债率","总资产净利率","存货周转率"],
+   answer:"C",
+   explain:"总资产净利率=净利润/平均资产总额，反映获利能力。流动比率反映短期偿债能力，资产负债率反映长期偿债能力，存货周转率反映营运能力。"},
+  {id:"b6",subject:"caiguan",chapter:"货币时间价值",type:"single",
+   stem:"已知（F/P,10%,5）=1.6105，则（P/F,10%,5）约等于（　）。",
+   options:["0.6209","1.6105","0.6806","0.5645"],
+   answer:"A",
+   explain:"复利现值系数与复利终值系数互为倒数：(P/F,10%,5)=1/1.6105≈0.6209。"},
+  {id:"b7",subject:"caiguan",chapter:"筹资管理",type:"judge",
+   stem:"判断：在其他条件不变的情况下，企业经营杠杆系数越大，经营风险越大。",
+   options:["正确","错误"],answer:"A",
+   explain:"正确。经营杠杆系数(DOL)越大，息税前利润对销量变动的敏感度越高，经营风险越大。"},
+  {id:"b8",subject:"caiguan",chapter:"成本管理",type:"multi",
+   stem:"下列各项中，属于变动成本的有（　）。",
+   options:["直接材料","直接人工(计件工资)","按直线法计提的固定资产折旧","行政管理人员的月薪"],
+   answer:["A","B"],
+   explain:"变动成本随业务量成正比变动：直接材料、计件工资属于变动成本。直线法折旧、固定月薪属于固定成本。"},
+
+  // —— 经济法 ——
+  {id:"b9",subject:"jingjifa",chapter:"公司法",type:"single",
+   stem:"根据公司法律制度的规定，有限责任公司股东会会议作出修改公司章程的决议，必须经（　）。",
+   options:["代表二分之一以上表决权的股东通过","代表三分之二以上表决权的股东通过","全体股东一致通过","出席会议的股东过半数通过"],
+   answer:"B",
+   explain:"有限责任公司股东会对修改公司章程、增减注册资本、合并、分立、解散或变更公司形式作出决议，必须经代表三分之二以上表决权的股东通过。"},
+  {id:"b10",subject:"jingjifa",chapter:"票据法",type:"single",
+   stem:"根据票据法律制度，下列关于支票的表述中，正确的是（　）。",
+   options:["支票的出票人可以是任何单位和个人","支票限于见票即付，不得另行记载付款日期","支票的提示付款期限为自出票日起1个月","现金支票可以背书转让"],
+   answer:"B",
+   explain:"支票限于见票即付，不得另行记载付款日期，另行记载的无效。支票提示付款期限为自出票日起10日。现金支票不得背书转让。"},
+  {id:"b11",subject:"jingjifa",chapter:"增值税",type:"judge",
+   stem:"判断：小规模纳税人发生应税销售行为，一律不得开具增值税专用发票。",
+   options:["正确","错误"],answer:"B",
+   explain:"错误。小规模纳税人可以自行开具或申请代开增值税专用发票（销售自己使用过的固定资产等特殊情形除外）。"},
+  {id:"b12",subject:"jingjifa",chapter:"合伙企业法",type:"multi",
+   stem:"根据合伙企业法律制度，下列关于普通合伙人的表述中，正确的有（　）。",
+   options:["普通合伙人对合伙企业债务承担无限连带责任","合伙企业财产不足清偿债务时由普通合伙人承担","普通合伙人可以用劳务出资","普通合伙人只以出资额为限承担责任"],
+   answer:["A","B","C"],
+   explain:"普通合伙人承担无限连带责任，可以用货币、实物、知识产权、土地使用权或劳务出资。D项“以出资额为限”是有限合伙人/有限责任公司股东的特征，错误。"},
+];
+
+const FLASHCARDS = [
+  {subject:"shiwu",q:"会计要素有哪几个？",a:"资产、负债、所有者权益、收入、费用、利润 —— 共6个。前三个反映财务状况，后三个反映经营成果。"},
+  {subject:"shiwu",q:"存货可变现净值的计算公式？",a:"可变现净值 = 估计售价 − 至完工估计将发生的成本 − 估计的销售费用及相关税费。"},
+  {subject:"shiwu",q:"资产负债表的基本等式？",a:"资产 = 负债 + 所有者权益。这是复式记账和报表编制的基础。"},
+  {subject:"caiguan",q:"净现值(NPV)的决策规则？",a:"NPV>0 接受方案；NPV<0 拒绝；NPV=0 临界。NPV=未来现金流量现值−初始投资。"},
+  {subject:"caiguan",q:"加权平均资本成本(WACC)是什么？",a:"企业各种资金来源(债务、权益)按市场价值权重加权平均后的资本成本，是投资决策的最低报酬率门槛。"},
+  {subject:"caiguan",q:"总杠杆系数(DTL)的关系式？",a:"DTL = DOL × DFL（总杠杆=经营杠杆×财务杠杆）。反映销量变动对每股收益的综合影响。"},
+  {subject:"jingjifa",q:"诉讼时效一般期间是多久？",a:"民法典规定普通诉讼时效为3年，自权利人知道或应当知道权利受损及义务人之日起计算，最长不超过20年。"},
+  {subject:"jingjifa",q:"增值税一般纳税人和小规模纳税人主要区别？",a:"计税方法不同：一般纳税人用“销项−进项”抵扣计税；小规模按征收率简易计税，不得抵扣进项。"},
+];
+
+const PLAN_CHAPTERS = {
+  shiwu:["第1章 概述","第2章 存货","第3章 固定资产","第4章 无形资产","第5章 投资性房地产","第6章 长期股权投资","第7章 金融资产","第8章 收入","第9章 职工薪酬","第10章 所得税","第11章 财务报告"],
+  caiguan:["第1章 总论","第2章 财务管理基础","第3章 预算管理","第4章 筹资管理(上)","第5章 筹资管理(下)","第6章 投资管理","第7章 营运资金管理","第8章 成本管理","第9章 收入与分配管理","第10章 财务分析与评价"],
+  jingjifa:["第1章 总论","第2章 公司法律制度","第3章 合伙企业法律制度","第4章 金融法律制度","第5章 合同法律制度","第6章 增值税法律制度","第7章 企业所得税法律制度","第8章 相关税收法律制度"],
+};
+
+/* ============ 状态存储 ============ */
+const LS_KEY = "zjkj_helper_v1";
+function loadState(){
+  try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }catch(e){ return {}; }
+}
+function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+let state = loadState();
+state.examDate = state.examDate || "2026-09-05";
+state.wrong = state.wrong || {};        // {qid: 错误次数}
+state.answered = state.answered || 0;   // 总答题数
+state.correct = state.correct || 0;     // 总正确数
+state.custom = state.custom || [];      // 自定义题目
+state.plan = state.plan || {};          // {chapKey:true}
+state.studyDays = state.studyDays || []; // 学习日期列表 "YYYY-MM-DD"
+state.flashSched = state.flashSched || {}; // {cardIndex:{due:date,level:n}}
+saveState();
+
+let curSubject = "shiwu";   // 当前科目（刷题/计划/添加用）
+let quizPool = [];          // 当前刷题序列
+let quizIdx = 0;
+let quizMode = "all";       // all / wrong
+
+/* ============ 工具函数 ============ */
+const $ = s=>document.querySelector(s);
+const todayStr = ()=> new Date().toISOString().slice(0,10);
+function allQuestions(){ return BUILTIN_QUESTIONS.concat(state.custom); }
+function getQ(id){ return allQuestions().find(q=>q.id===id); }
+function markStudyToday(){ const t=todayStr(); if(!state.studyDays.includes(t)){state.studyDays.push(t);} }
+function streak(){
+  if(!state.studyDays.length) return 0;
+  let s=new Set(state.studyDays), n=0, d=new Date();
+  while(s.has(d.toISOString().slice(0,10))){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1700); }
+
+function refreshCountdown(){
+  const diff = Math.ceil((new Date(state.examDate) - new Date(todayStr()))/86400000);
+  $("#cdDays").textContent = diff>=0 ? diff : "已过";
+}
+
+/* ============ 视图切换 ============ */
+const views = ["home","quiz","wrong","flash","plan","add","data"];
+function show(v){
+  views.forEach(x=>{ $("#view-"+x).hidden = (x!==v); });
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active", b.dataset.view===v));
+  window.scrollTo(0,0);
+  if(v==="home")renderHome();
+  if(v==="quiz")renderQuizStart();
+  if(v==="wrong")renderWrong();
+  if(v==="flash")renderFlash();
+  if(v==="plan")renderPlan();
+  if(v==="add")renderAdd();
+  if(v==="data")renderData();
+}
+document.querySelectorAll("#nav button").forEach(b=> b.onclick=()=>show(b.dataset.view));
+
+/* ============ 首页 ============ */
+function renderHome(){
+  refreshCountdown();
+  const acc = state.answered ? Math.round(state.correct/state.answered*100) : 0;
+  const dueFlash = flashDueCount();
+  let subjStats = Object.keys(SUBJECTS).map(k=>{
+    const total = PLAN_CHAPTERS[k].length;
+    const done = PLAN_CHAPTERS[k].filter((_,i)=>state.plan[k+"_"+i]).length;
+    const pct = Math.round(done/total*100);
+    return `<div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;font-size:14px">
+        <span><b>${SUBJECTS[k].name}</b></span><span style="color:var(--muted)">${done}/${total} 章 · ${pct}%</span>
+      </div>
+      <div class="progbar"><i style="width:${pct}%"></i></div></div>`;
+  }).join("");
+
+  $("#view-home").innerHTML = `
+    <div class="card">
+      <h2>👋 加油，你正在备考中级会计师</h2>
+      <div class="row">
+        <div class="stat"><div class="num">${$("#cdDays").textContent}</div><div class="lbl">距考试天数</div></div>
+        <div class="stat"><div class="num">${streak()}</div><div class="lbl">连续学习天数 🔥</div></div>
+        <div class="stat"><div class="num">${state.answered}</div><div class="lbl">累计做题</div></div>
+        <div class="stat"><div class="num">${acc}%</div><div class="lbl">正确率</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>📚 各科学习进度</h2>
+      ${subjStats}
+    </div>
+    <div class="card">
+      <h2>🎯 今天可以做的</h2>
+      <button class="btn block" style="margin-bottom:10px" onclick="show('quiz')">📝 开始刷题（共 ${allQuestions().length} 题）</button>
+      <button class="btn ghost block" style="margin-bottom:10px" onclick="show('flash')">🗂 复习闪卡${dueFlash?`（今天 ${dueFlash} 张待复习）`:""}</button>
+      ${Object.keys(state.wrong).length?`<button class="btn ghost block" onclick="show('wrong')">❌ 攻克错题（${Object.keys(state.wrong).length} 道）</button>`:""}
+    </div>`;
+}
+
+/* ============ 刷题 ============ */
+function renderQuizStart(){
+  $("#view-quiz").innerHTML = `
+    <div class="card">
+      <h2>选择刷题科目</h2>
+      <div class="subj-bar" id="quizSubj"></div>
+      <button class="btn block" onclick="startQuiz('${curSubject}')">🚀 开始刷题</button>
+      <div class="hint">做完每题立刻显示答案和解析；做错的题会自动进入「错题本」。</div>
+    </div>`;
+  renderSubjBar("quizSubj");
+}
+function renderSubjBar(containerId){
+  const c = $("#"+containerId);
+  c.innerHTML = Object.keys(SUBJECTS).map(k=>{
+    const cnt = allQuestions().filter(q=>q.subject===k).length;
+    return `<button class="${k===curSubject?'active':''}" onclick="curSubject='${k}';renderSubjBar('${containerId}')">${SUBJECTS[k].short}<br><small style="opacity:.7">${cnt}题</small></button>`;
+  }).join("");
+}
+function startQuiz(subj){
+  curSubject = subj;
+  quizPool = allQuestions().filter(q=>q.subject===subj);
+  if(!quizPool.length){ toast("该科目暂无题目，去「添加题目」录入吧"); return; }
+  // 打乱
+  quizPool = quizPool.sort(()=>Math.random()-0.5);
+  quizIdx = 0; quizMode="all";
+  markStudyToday(); saveState();
+  renderQuestion();
+}
+let curSelection = null; // single/judge: 字母; multi: 数组
+function renderQuestion(){
+  if(quizIdx>=quizPool.length){ renderQuizDone(); return; }
+  const q = quizPool[quizIdx];
+  curSelection = (q.type==="multi") ? [] : null;
+  const keys=["A","B","C","D","E","F"];
+  const typeName={single:"单选题",multi:"多选题",judge:"判断题"}[q.type];
+  $("#view-quiz").innerHTML = `
+    <div class="card">
+      <div class="q-meta">
+        <span class="tag">${SUBJECTS[q.subject].short}</span>
+        <span class="tag">${typeName}</span>
+        ${q.chapter?`<span class="tag">${q.chapter}</span>`:""}
+        <span style="margin-left:auto;color:var(--muted)">${quizIdx+1} / ${quizPool.length}</span>
+      </div>
+      <div class="q-stem">${escapeHtml(q.stem)}</div>
+      <div id="opts">${q.options.map((o,i)=>`
+        <div class="opt" data-key="${keys[i]}" onclick="pick('${keys[i]}','${q.type}')">
+          <span class="key">${keys[i]}</span><span>${escapeHtml(o)}</span>
+        </div>`).join("")}</div>
+      <div id="explainBox"></div>
+      <div class="q-actions">
+        <button class="btn" id="submitBtn" onclick='submitAnswer()'>提交答案</button>
+        <button class="btn ghost" id="nextBtn" onclick="quizIdx++;renderQuestion()" hidden>下一题 →</button>
+        <button class="btn ghost sm" onclick="show('quiz')">退出</button>
+      </div>
+    </div>`;
+}
+function pick(key,type){
+  if($("#submitBtn").hidden) return; // 已提交不可改
+  if(type==="multi"){
+    const i=curSelection.indexOf(key);
+    if(i>=0)curSelection.splice(i,1); else curSelection.push(key);
+  }else{
+    curSelection = key;
+  }
+  document.querySelectorAll("#opts .opt").forEach(el=>{
+    const k=el.dataset.key;
+    const on = type==="multi" ? curSelection.includes(k) : curSelection===k;
+    el.classList.toggle("sel", on);
+  });
+}
+function submitAnswer(){
+  const q=quizPool[quizIdx];
+  if((q.type==="multi" && !curSelection.length) || (q.type!=="multi" && !curSelection)){ toast("请先选择答案"); return; }
+  let correct;
+  if(q.type==="multi"){
+    const a=[...q.answer].sort().join(""), s=[...curSelection].sort().join("");
+    correct = a===s;
+  }else correct = curSelection===q.answer;
+
+  state.answered++; if(correct)state.correct++;
+  const ans = q.type==="multi"?q.answer:[q.answer];
+  document.querySelectorAll("#opts .opt").forEach(el=>{
+    const k=el.dataset.key;
+    if(ans.includes(k))el.classList.add("correct");
+    else if((q.type==="multi"?curSelection:[curSelection]).includes(k))el.classList.add("wrong");
+  });
+  if(correct){ delete state.wrong[q.id]; }
+  else{ state.wrong[q.id]=(state.wrong[q.id]||0)+1; }
+  saveState();
+
+  const ansStr = q.type==="multi"?q.answer.join("、"):q.answer;
+  $("#explainBox").innerHTML = `<div class="explain">
+    <div class="res ${correct?'ok':'no'}">${correct?'✅ 回答正确':'❌ 回答错误'}　正确答案：${ansStr}</div>
+    ${escapeHtml(q.explain||"（暂无解析）")}</div>`;
+  $("#submitBtn").hidden=true;
+  $("#nextBtn").hidden=false;
+}
+function renderQuizDone(){
+  $("#view-quiz").innerHTML=`<div class="card" style="text-align:center">
+    <h2>🎉 本轮刷题完成！</h2>
+    <p style="color:var(--muted)">坚持就是胜利，错题已自动收录，记得去攻克。</p>
+    <button class="btn block" style="margin-top:10px" onclick="startQuiz('${curSubject}')">🔁 再刷一轮</button>
+    <button class="btn ghost block" style="margin-top:10px" onclick="show('wrong')">❌ 去看错题本</button>
+    <button class="btn ghost block" style="margin-top:10px" onclick="show('home')">🏠 回首页</button>
+  </div>`;
+}
+
+/* ============ 错题本 ============ */
+function renderWrong(){
+  const ids=Object.keys(state.wrong);
+  if(!ids.length){ $("#view-wrong").innerHTML=`<div class="card empty">🎊 太棒了，暂无错题！<br>继续保持～</div>`; return; }
+  $("#view-wrong").innerHTML=`
+    <div class="card">
+      <h2>❌ 错题本（${ids.length} 道）</h2>
+      <div class="hint">把错题重做一遍，做对后自动移出错题本。</div>
+      <button class="btn block" style="margin-top:12px" onclick="startWrongQuiz()">🔁 重做全部错题</button>
+    </div>
+    ${ids.map(id=>{const q=getQ(id); if(!q)return""; return `
+      <div class="card">
+        <div class="q-meta"><span class="tag">${SUBJECTS[q.subject].short}</span><span class="tag">错 ${state.wrong[id]} 次</span>${q.chapter?`<span class="tag">${q.chapter}</span>`:""}</div>
+        <div style="font-size:15px;font-weight:600">${escapeHtml(q.stem)}</div>
+        <div class="explain" style="margin-top:10px"><b>答案：</b>${q.type==='multi'?q.answer.join('、'):q.answer}<br>${escapeHtml(q.explain||'')}</div>
+      </div>`;}).join("")}`;
+}
+function startWrongQuiz(){
+  quizPool = Object.keys(state.wrong).map(getQ).filter(Boolean).sort(()=>Math.random()-0.5);
+  if(!quizPool.length){toast("没有错题");return;}
+  quizIdx=0; markStudyToday(); saveState();
+  views.forEach(x=>$("#view-"+x).hidden=(x!=="quiz"));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view==="quiz"));
+  renderQuestion();
+}
+
+/* ============ 闪卡（艾宾浩斯间隔复习）============ */
+const FLASH_INTERVALS=[1,2,4,7,15,30]; // 天
+function flashDueCount(){
+  return FLASHCARDS.filter((_,i)=>{
+    const s=state.flashSched[i];
+    return !s || s.due<=todayStr();
+  }).length;
+}
+let flashQueue=[], flashPos=0, flashFlipped=false;
+function renderFlash(){
+  flashQueue = FLASHCARDS.map((c,i)=>({...c,_i:i})).filter(c=>{
+    const s=state.flashSched[c._i]; return !s || s.due<=todayStr();
+  });
+  flashPos=0; flashFlipped=false;
+  if(!flashQueue.length){
+    $("#view-flash").innerHTML=`<div class="card empty">✅ 今天的闪卡都复习完啦！<br>明天再来按遗忘曲线巩固吧～</div>`;
+    return;
+  }
+  drawFlash();
+}
+function drawFlash(){
+  if(flashPos>=flashQueue.length){
+    $("#view-flash").innerHTML=`<div class="card empty">🎉 本轮闪卡复习完成！<br><button class="btn" style="margin-top:14px" onclick="show('home')">回首页</button></div>`;
+    return;
+  }
+  const c=flashQueue[flashPos];
+  $("#view-flash").innerHTML=`
+    <div class="card">
+      <div class="q-meta"><span class="tag">${SUBJECTS[c.subject].short}</span><span style="margin-left:auto;color:var(--muted)">${flashPos+1}/${flashQueue.length}</span></div>
+      <div class="flash" onclick="flipFlash()">
+        <small>${flashFlipped?'答案':'点击卡片查看答案'}</small>
+        <div>${escapeHtml(c.q)}</div>
+        ${flashFlipped?`<div class="a">${escapeHtml(c.a)}</div>`:""}
+      </div>
+      ${flashFlipped?`
+      <div class="hint" style="text-align:center;margin-top:14px">这个知识点你掌握得怎么样？</div>
+      <div class="grid2" style="margin-top:10px">
+        <button class="btn ghost" onclick="rateFlash(false)">😵 没记住（明天再来）</button>
+        <button class="btn" onclick="rateFlash(true)">😎 记住了（拉长间隔）</button>
+      </div>`:`
+      <button class="btn block" style="margin-top:14px" onclick="flipFlash()">翻看答案</button>`}
+    </div>`;
+}
+function flipFlash(){ flashFlipped=true; drawFlash(); }
+function rateFlash(ok){
+  const c=flashQueue[flashPos];
+  let s=state.flashSched[c._i]||{level:0};
+  if(ok) s.level=Math.min(s.level+1,FLASH_INTERVALS.length-1); else s.level=0;
+  const d=new Date(); d.setDate(d.getDate()+FLASH_INTERVALS[s.level]);
+  s.due=d.toISOString().slice(0,10);
+  state.flashSched[c._i]=s;
+  markStudyToday(); saveState();
+  flashPos++; flashFlipped=false; drawFlash();
+}
+
+/* ============ 学习计划 ============ */
+function renderPlan(){
+  $("#view-plan").innerHTML=`
+    <div class="card">
+      <h2>✅ 章节学习打卡</h2>
+      <div class="subj-bar" id="planSubj"></div>
+      <div id="planList"></div>
+    </div>`;
+  renderPlanSubj();
+}
+function renderPlanSubj(){
+  $("#planSubj").innerHTML=Object.keys(SUBJECTS).map(k=>
+    `<button class="${k===curSubject?'active':''}" onclick="curSubject='${k}';renderPlanSubj()">${SUBJECTS[k].short}</button>`).join("");
+  const chs=PLAN_CHAPTERS[curSubject];
+  const done=chs.filter((_,i)=>state.plan[curSubject+"_"+i]).length;
+  $("#planList").innerHTML=`
+    <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:4px">
+      <span>已完成 ${done}/${chs.length} 章</span><span>${Math.round(done/chs.length*100)}%</span></div>
+    <div class="progbar"><i style="width:${Math.round(done/chs.length*100)}%"></i></div>
+    ${chs.map((ch,i)=>{const key=curSubject+"_"+i;const d=state.plan[key];return `
+      <div class="chap ${d?'done':''}">
+        <input type="checkbox" id="${key}" ${d?'checked':''} onchange="togglePlan('${key}')">
+        <label for="${key}">${ch}</label>
+      </div>`;}).join("")}`;
+}
+function togglePlan(key){
+  if(state.plan[key])delete state.plan[key]; else {state.plan[key]=true; markStudyToday();}
+  saveState(); renderPlanSubj();
+}
+
+/* ============ 添加题目 ============ */
+function renderAdd(){
+  $("#view-add").innerHTML=`
+    <div class="card">
+      <h2>➕ 添加我自己的题目</h2>
+      <label class="fl">科目</label>
+      <select id="aSubj">${Object.keys(SUBJECTS).map(k=>`<option value="${k}">${SUBJECTS[k].name}</option>`).join("")}</select>
+      <label class="fl">题型</label>
+      <select id="aType" onchange="onTypeChange()">
+        <option value="single">单选题</option><option value="multi">多选题</option><option value="judge">判断题</option>
+      </select>
+      <label class="fl">所属章节（选填）</label>
+      <input type="text" id="aChap" placeholder="如：第2章 存货">
+      <label class="fl">题干</label>
+      <textarea id="aStem" placeholder="输入题目内容…"></textarea>
+      <div id="aOptWrap">
+        <label class="fl">选项（每行一个）</label>
+        <textarea id="aOpts" placeholder="选项A&#10;选项B&#10;选项C&#10;选项D"></textarea>
+      </div>
+      <label class="fl">正确答案</label>
+      <input type="text" id="aAns" placeholder="单选填字母如 A；多选填如 ABD；判断填 A(正确)或B(错误)">
+      <label class="fl">答案解析（选填）</label>
+      <textarea id="aExp" placeholder="为什么选这个答案…"></textarea>
+      <button class="btn block" style="margin-top:16px" onclick="addQuestion()">💾 保存题目</button>
+      <div class="hint">已添加 ${state.custom.length} 道自定义题目。题目保存在本设备浏览器中。</div>
+    </div>`;
+}
+function onTypeChange(){
+  const t=$("#aType").value;
+  $("#aOptWrap").style.display = t==="judge"?"none":"block";
+  $("#aAns").placeholder = t==="single"?"单选填一个字母，如 A"
+    : t==="multi"?"多选填多个字母，如 ABD"
+    : "判断题：A=正确，B=错误";
+}
+function addQuestion(){
+  const subj=$("#aSubj").value, type=$("#aType").value;
+  const stem=$("#aStem").value.trim();
+  const exp=$("#aExp").value.trim();
+  const chap=$("#aChap").value.trim();
+  let ansRaw=$("#aAns").value.trim().toUpperCase().replace(/[^A-F]/g,"");
+  if(!stem){toast("请填写题干");return;}
+  if(!ansRaw){toast("请填写正确答案");return;}
+  let options, answer;
+  if(type==="judge"){ options=["正确","错误"]; answer=ansRaw[0]; }
+  else{
+    options=$("#aOpts").value.split("\n").map(s=>s.trim()).filter(Boolean);
+    if(options.length<2){toast("请至少填写2个选项");return;}
+    answer = type==="multi" ? ansRaw.split("") : ansRaw[0];
+  }
+  state.custom.push({id:"c"+Date.now(),subject:subj,chapter:chap,type,stem,options,answer,explain:exp});
+  saveState();
+  toast("✅ 已保存！");
+  renderAdd();
+}
+
+/* ============ 数据备份 ============ */
+function renderData(){
+  $("#view-data").innerHTML=`
+    <div class="card">
+      <h2>⚙️ 数据备份与恢复</h2>
+      <p class="hint">你的学习记录、错题、自定义题目都存在本设备浏览器里。换设备或清理浏览器前，请先导出备份。</p>
+      <button class="btn block" style="margin-bottom:10px" onclick="exportData()">📤 导出备份文件</button>
+      <label class="btn ghost block" style="margin-bottom:10px;text-align:center">📥 导入备份文件
+        <input type="file" accept=".json" style="display:none" onchange="importData(event)">
+      </label>
+      <button class="btn ghost block" style="color:var(--err)" onclick="resetData()">🗑 清空所有数据</button>
+    </div>
+    <div class="card">
+      <h2>📊 学习统计</h2>
+      <div class="row">
+        <div class="stat"><div class="num">${state.answered}</div><div class="lbl">累计做题</div></div>
+        <div class="stat"><div class="num">${state.answered?Math.round(state.correct/state.answered*100):0}%</div><div class="lbl">正确率</div></div>
+        <div class="stat"><div class="num">${state.studyDays.length}</div><div class="lbl">学习总天数</div></div>
+        <div class="stat"><div class="num">${state.custom.length}</div><div class="lbl">自定义题目</div></div>
+      </div>
+    </div>`;
+}
+function exportData(){
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="中级会计备考备份_"+todayStr()+".json";
+  a.click();
+  toast("已导出备份");
+}
+function importData(e){
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ state=JSON.parse(r.result); saveState(); toast("✅ 导入成功"); refreshCountdown(); show('home'); }catch(err){ toast("文件格式错误"); } };
+  r.readAsText(f);
+}
+function resetData(){
+  if(confirm("确定清空所有学习数据吗？此操作不可恢复！建议先导出备份。")){
+    localStorage.removeItem(LS_KEY); location.reload();
+  }
+}
+
+/* ============ 考试日期弹窗 ============ */
+$("#countdown").onclick=()=>{ $("#examDate").value=state.examDate; $("#modal").classList.add("show"); };
+function closeModal(){ $("#modal").classList.remove("show"); }
+function saveExamDate(){
+  const v=$("#examDate").value; if(!v)return;
+  state.examDate=v; saveState(); refreshCountdown(); closeModal(); toast("已更新考试日期");
+  if(!$("#view-home").hidden)renderHome();
+}
+
+function escapeHtml(s){ return (s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+
+/* ============ 启动 ============ */
+refreshCountdown();
+renderHome();
+</script>
+</body>
+</html>
