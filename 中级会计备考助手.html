@@ -504,6 +504,8 @@ let curSubject = "shiwu";
 let quizPool=[], quizIdx=0, quizScope="chapter", curPaperId=null;
 let runStat={correct:0,total:0};
 let curSelection=null;
+let addMode="single";
+let bulkParsed=[];   // 批量解析后的待导入题目
 
 /* ===================== 工具 ===================== */
 const $ = s=>document.querySelector(s);
@@ -857,9 +859,18 @@ function togglePlan(key){
   saveState(); renderPlanSubj();
 }
 
-/* ===================== 添加题目 ===================== */
+/* ===================== 添加题目（单题 / 批量）===================== */
 function renderAdd(){
-  $("#view-add").innerHTML=`<div class="card"><h2>➕ 添加我自己的题目</h2>
+  $("#view-add").innerHTML=`<div class="card">
+    <div class="seg">
+      <button class="${addMode==='single'?'active':''}" onclick="addMode='single';renderAdd()">✍️ 单题添加</button>
+      <button class="${addMode==='bulk'?'active':''}" onclick="addMode='bulk';renderAdd()">📦 批量导入（推荐）</button>
+    </div>
+    <div id="addBody"></div></div>`;
+  if(addMode==="single")renderSingleAdd(); else renderBulkAdd();
+}
+function renderSingleAdd(){
+  $("#addBody").innerHTML=`
     <label class="fl">科目</label>
     <select id="aSubj">${Object.keys(SUBJECTS).map(k=>`<option value="${k}">${SUBJECTS[k].name}</option>`).join("")}</select>
     <label class="fl">所属章节</label>
@@ -880,7 +891,7 @@ function renderAdd(){
     <label class="fl">答案解析</label>
     <textarea id="aExp" placeholder="为什么选这个答案…"></textarea>
     <button class="btn block" style="margin-top:16px" onclick="addQuestion()">💾 保存题目</button>
-    <div class="hint">已添加 ${state.custom.length} 道自定义题目，保存在本设备。</div></div>`;
+    <div class="hint">已添加 ${state.custom.length} 道自定义题目，保存在本设备。</div>`;
   fillChapSelect(); onTypeChange();
   $("#aSubj").onchange=fillChapSelect;
 }
@@ -907,6 +918,159 @@ function addQuestion(){
     answer=type==="multi"?ansRaw.split(""):ansRaw[0]; }
   state.custom.push({id:"c"+Date.now(),subject,chapter,point,src,level,type,stem,options,answer,explain:exp});
   saveState(); toast("✅ 已保存！"); renderAdd();
+}
+
+/* ---------- 批量导入 ---------- */
+const BULK_SAMPLE = `【单选】下列各项中，不属于流动资产的是（　）。
+A. 应收账款
+B. 存货
+C. 固定资产
+D. 交易性金融资产
+答案：C
+解析：固定资产属于非流动资产。应收账款、存货、交易性金融资产均为流动资产。
+章节：第11章 财务报告
+知识点：资产分类
+来源：模拟题
+难度：重点
+
+【多选】下列属于所有者权益的有（　）。
+A. 实收资本
+B. 资本公积
+C. 盈余公积
+D. 应付债券
+答案：ABC
+解析：应付债券属于负债。
+
+【判断】权责发生制以款项是否实际收付作为确认标准。
+答案：错
+解析：权责发生制以权责归属期间为准，与款项是否收付无关。`;
+
+function renderBulkAdd(){
+  $("#addBody").innerHTML=`
+    <div class="warn-box">📦 把题目按下面的格式粘贴进来，可一次导入成百上千道。也支持上传 <b>.json</b> 文件。</div>
+    <label class="fl">本批题目所属科目（题目内未单独写“科目：”时，默认归到这里）</label>
+    <select id="bSubj">${Object.keys(SUBJECTS).map(k=>`<option value="${k}">${SUBJECTS[k].name}</option>`).join("")}</select>
+    <label class="fl">粘贴题目（每道题之间空一行隔开）</label>
+    <textarea id="bText" style="min-height:220px" placeholder="把题目粘贴到这里…"></textarea>
+    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+      <button class="btn" style="flex:1;min-width:120px" onclick="bulkParse()">🔍 解析预览</button>
+      <button class="btn ghost sm" onclick="$('#bText').value=BULK_SAMPLE;bulkParse()">填入示例</button>
+      <label class="btn ghost sm" style="text-align:center">📁 导入JSON<input type="file" accept=".json" style="display:none" onchange="bulkImportJson(event)"></label>
+    </div>
+    <div id="bulkPreview"></div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;color:var(--primary)">📖 查看完整格式说明</summary>
+      <div class="disclaimer" style="margin-top:10px">
+<b>每道题的写法：</b><br>
+① 第一行：题干，可在最前面用【单选】【多选】【判断】标明题型（不写则自动判断）。<br>
+② 选项行：以 A. / A、/ A) 开头，每行一个（判断题可省略选项）。<br>
+③ <b>答案：</b>单选填 A；多选填 ABD；判断填 对 / 错（或 A / B）。<br>
+④ <b>解析：</b>答案分析（强烈建议写）。<br>
+⑤ 可选：<b>章节：</b>、<b>知识点：</b>、<b>来源：</b>真题/模拟题、<b>难度：</b>重点/难点/一般、<b>科目：</b>实务/财管/经济法。<br>
+⑥ 题与题之间用<b>空一行</b>隔开。<br>
+点“填入示例”可看一个标准范例。
+      </div></details>`;
+}
+
+function bulkParse(){
+  const text=$("#bText").value;
+  const defSubj=$("#bSubj").value;
+  const {ok,errs}=parseBulk(text,defSubj);
+  bulkParsed=ok;
+  const box=$("#bulkPreview");
+  if(!ok.length && !errs.length){ box.innerHTML=`<div class="empty">没有解析到题目，请检查格式。</div>`; return; }
+  box.innerHTML=`
+    <div class="card" style="margin-top:14px;box-shadow:none;border:1.5px solid var(--line)">
+      <div style="font-weight:600;margin-bottom:8px">解析结果：成功 <span style="color:var(--ok)">${ok.length}</span> 道${errs.length?`，跳过 <span style="color:var(--err)">${errs.length}</span> 道`:""}</div>
+      ${errs.length?`<div class="urgent-box">${errs.slice(0,8).map(e=>escapeHtml(e)).join("<br>")}${errs.length>8?`<br>…还有${errs.length-8}条问题`:""}</div>`:""}
+      ${ok.length?`<div class="hint">预览前3道：</div>${ok.slice(0,3).map(q=>`<div style="font-size:13px;padding:6px 0;border-bottom:1px solid var(--line)"><b>[${({single:'单选',multi:'多选',judge:'判断'})[q.type]}]</b> ${escapeHtml(q.stem.slice(0,40))}… <span style="color:var(--ok)">答案${Array.isArray(q.answer)?q.answer.join(''):q.answer}</span></div>`).join("")}
+      <button class="btn block" style="margin-top:14px" onclick="bulkConfirm()">✅ 确认导入 ${ok.length} 道题</button>`:""}
+    </div>`;
+}
+function bulkConfirm(){
+  if(!bulkParsed.length){toast("没有可导入的题目");return;}
+  const now=Date.now();
+  bulkParsed.forEach((q,i)=>{ q.id="c"+now+"_"+i; state.custom.push(q); });
+  saveState();
+  toast("✅ 成功导入 "+bulkParsed.length+" 道题");
+  bulkParsed=[]; $("#bText").value=""; renderAdd();
+}
+function bulkImportJson(e){
+  const f=e.target.files[0]; if(!f)return; const r=new FileReader();
+  r.onload=()=>{ try{
+    let arr=JSON.parse(r.result); if(!Array.isArray(arr))throw 0;
+    const defSubj=$("#bSubj").value; let n=0;
+    arr.forEach((q,i)=>{
+      if(!q.stem||!q.answer)return;
+      const subject=subjKey(q.subject)||defSubj;
+      const type=q.type||(Array.isArray(q.answer)?"multi":((q.options&&q.options.length<=2)?"judge":"single"));
+      state.custom.push({id:"j"+Date.now()+"_"+i,subject,chapter:q.chapter||"",point:q.point||"",
+        src:q.src||"模拟题",level:q.level||"一般",type,
+        options:q.options||(type==="judge"?["正确","错误"]:[]),
+        answer:q.answer,explain:q.explain||""}); n++;
+    });
+    saveState(); toast("✅ 从JSON导入 "+n+" 道题"); renderAdd();
+  }catch(err){ toast("JSON格式错误"); } };
+  r.readAsText(f);
+}
+
+function subjKey(s){
+  if(!s)return null; s=(""+s).trim();
+  for(const k in SUBJECTS){ if(k===s||SUBJECTS[k].name===s||SUBJECTS[k].short===s||s.includes(SUBJECTS[k].short))return k; }
+  if(s.includes("实务"))return "shiwu";
+  if(s.includes("财")||s.includes("财管"))return "caiguan";
+  if(s.includes("经济")||s.includes("法"))return "jingjifa";
+  return null;
+}
+/* 文本批量解析器：返回 {ok:[题目], errs:[问题描述]} */
+function parseBulk(text,defSubj){
+  const ok=[],errs=[];
+  // 用空行或 --- 分隔题块
+  const blocks=text.split(/\n\s*\n|\n-{3,}\n/).map(b=>b.trim()).filter(Boolean);
+  blocks.forEach((blk,bi)=>{
+    const lines=blk.split("\n").map(l=>l.trim()).filter(Boolean);
+    if(!lines.length)return;
+    let stem="",options=[],ansRaw="",explain="",chapter="",point="",src="模拟题",level="一般",subject=defSubj,type=null;
+    lines.forEach(line=>{
+      let m;
+      if((m=line.match(/^([A-F])\s*[.．、)）:：]\s*(.+)$/))){ options.push(m[2].trim()); return; }
+      if((m=line.match(/^(答案|正确答案|答)\s*[:：]?\s*(.+)$/))){ ansRaw=m[2].trim(); return; }
+      if((m=line.match(/^(解析|分析|答案解析)\s*[:：]?\s*(.*)$/))){ explain=m[2].trim(); return; }
+      if((m=line.match(/^(章节|章)\s*[:：]\s*(.+)$/))){ chapter=m[2].trim(); return; }
+      if((m=line.match(/^(知识点|考点)\s*[:：]\s*(.+)$/))){ point=m[2].trim(); return; }
+      if((m=line.match(/^(来源)\s*[:：]\s*(.+)$/))){ src=m[2].includes("真")?"真题":"模拟题"; return; }
+      if((m=line.match(/^(难度|重要程度|程度)\s*[:：]\s*(.+)$/))){ const v=m[2].trim(); level=/重点|难点|一般/.test(v)?v.match(/重点|难点|一般/)[0]:"一般"; return; }
+      if((m=line.match(/^(科目)\s*[:：]\s*(.+)$/))){ subject=subjKey(m[2])||defSubj; return; }
+      // 否则作为题干（取第一条）
+      if(!stem){
+        let t=line;
+        const tm=t.match(/^[【\[(（]?\s*(单项选择题|多项选择题|单选题|多选题|判断题|单项选择|多项选择|单选|多选|判断)\s*[】\])）]?\s*[、.．:：]?\s*/);
+        if(tm){ const w=tm[1]; type=/多/.test(w)?"multi":(/判断/.test(w)?"judge":"single"); t=t.slice(tm[0].length); }
+        stem=t.trim();
+      } else { stem+=" "+line; } // 题干续行
+    });
+    if(!stem){ errs.push(`第${bi+1}块：缺题干`); return; }
+    if(!ansRaw){ errs.push(`第${bi+1}块「${stem.slice(0,12)}…」：缺答案`); return; }
+    // 自动判型
+    if(!type){
+      if(options.length<=2 && /^(对|错|正确|错误|√|×|T|F|A|B)$/i.test(ansRaw)) type="judge";
+      else{ const letters=ansRaw.toUpperCase().replace(/[^A-F]/g,""); type=letters.length>1?"multi":"single"; }
+    }
+    let answer;
+    if(type==="judge"){
+      options=options.length>=2?options:["正确","错误"];
+      answer=/对|正确|√|T|^A$/i.test(ansRaw)?"A":(/错|×|F|^B$/i.test(ansRaw)?"B":null);
+      if(!answer){ errs.push(`第${bi+1}块「${stem.slice(0,12)}…」：判断题答案应为 对/错`); return; }
+    }else{
+      const letters=ansRaw.toUpperCase().replace(/[^A-F]/g,"").split("");
+      if(!letters.length){ errs.push(`第${bi+1}块「${stem.slice(0,12)}…」：答案无效`); return; }
+      if(options.length<2){ errs.push(`第${bi+1}块「${stem.slice(0,12)}…」：选项不足2个`); return; }
+      const maxIdx=options.length-1, keys=["A","B","C","D","E","F"];
+      for(const L of letters){ if(keys.indexOf(L)>maxIdx){ errs.push(`第${bi+1}块「${stem.slice(0,12)}…」：答案${L}超出选项范围`); return; } }
+      answer=type==="multi"?letters:letters[0];
+    }
+    ok.push({subject,chapter,point,src,level,type,stem,options,answer,explain});
+  });
+  return {ok,errs};
 }
 
 /* ===================== 数据备份 ===================== */
