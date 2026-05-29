@@ -13,17 +13,14 @@
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
     background:var(--bg);color:var(--text);line-height:1.6}
-  /* 顶部 */
   header{background:linear-gradient(135deg,#3b6ef0,#5a4ff0);color:#fff;padding:18px 16px 14px;position:sticky;top:0;z-index:50;box-shadow:0 2px 14px rgba(40,60,120,.18)}
   .h-top{display:flex;justify-content:space-between;align-items:center;max-width:880px;margin:0 auto;gap:10px}
   .h-top h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.5px}
   .countdown{text-align:right;font-size:13px;opacity:.95;cursor:pointer}
   .countdown b{font-size:22px;display:block;line-height:1.1}
-  /* 标签导航 */
   nav{display:flex;gap:4px;max-width:880px;margin:12px auto 0;overflow-x:auto;padding-bottom:2px}
   nav button{flex:0 0 auto;background:rgba(255,255,255,.18);color:#fff;border:none;padding:7px 14px;border-radius:20px;font-size:14px;cursor:pointer;white-space:nowrap;transition:.2s}
   nav button.active{background:#fff;color:var(--primary);font-weight:600}
-  /* 主体 */
   main{max-width:880px;margin:0 auto;padding:16px 14px 60px}
   .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
   .card h2{margin:0 0 14px;font-size:16px}
@@ -31,26 +28,27 @@
   .stat{flex:1;min-width:130px;background:linear-gradient(135deg,#f7f9ff,#eef2ff);border-radius:14px;padding:14px;text-align:center}
   .stat .num{font-size:26px;font-weight:700;color:var(--primary)}
   .stat .lbl{font-size:12px;color:var(--muted);margin-top:2px}
-  /* 科目选择条 */
   .subj-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
   .subj-bar button{flex:1;min-width:90px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px;cursor:pointer;font-size:14px;color:var(--text);transition:.15s}
   .subj-bar button.active{border-color:var(--primary);background:#eef3ff;color:var(--primary);font-weight:600}
-  /* 按钮 */
   .btn{background:var(--primary);color:#fff;border:none;padding:11px 18px;border-radius:10px;font-size:15px;cursor:pointer;transition:.15s;font-weight:500}
   .btn:hover{background:var(--primary-dark)}
   .btn:disabled{opacity:.45;cursor:not-allowed}
   .btn.ghost{background:#eef1f8;color:var(--text)}
   .btn.sm{padding:7px 13px;font-size:13px}
   .btn.block{display:block;width:100%}
-  /* 题目 */
-  .q-meta{font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap}
+  .q-meta{font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
   .tag{background:#eef1f8;color:var(--muted);padding:2px 9px;border-radius:20px;font-size:12px}
+  .tag.zhenti{background:#fdeccf;color:#b9791b}
+  .tag.moni{background:#e7f0ff;color:#3b6ef0}
+  .tag.zhongdian{background:#fde8e7;color:#d4443e}
+  .tag.nandian{background:#efe6fb;color:#7a44c4}
   .q-stem{font-size:16px;font-weight:600;margin-bottom:14px;white-space:pre-wrap}
   .opt{display:flex;align-items:flex-start;gap:10px;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:9px;cursor:pointer;transition:.12s}
   .opt:hover{border-color:#c3cdec}
   .opt.sel{border-color:var(--primary);background:#eef3ff}
   .opt.correct{border-color:var(--ok);background:#e9f8f1}
-  .opt.wrong{border-color:var(--err);background:#fceb ea;background:#fdecea}
+  .opt.wrong{border-color:var(--err);background:#fdecea}
   .opt .key{font-weight:700;color:var(--muted);flex:0 0 auto}
   .opt.sel .key,.opt.correct .key{color:var(--primary)}
   .opt.correct .key{color:var(--ok)}
@@ -59,7 +57,6 @@
   .explain .res{font-weight:700;margin-bottom:6px}
   .res.ok{color:var(--ok)} .res.no{color:var(--err)}
   .q-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-  /* 章节进度 */
   .chap{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line)}
   .chap:last-child{border-bottom:none}
   .chap input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--primary);cursor:pointer}
@@ -67,17 +64,14 @@
   .chap.done label{color:var(--muted);text-decoration:line-through}
   .progbar{height:9px;background:#eef1f8;border-radius:6px;overflow:hidden;margin:6px 0 14px}
   .progbar i{display:block;height:100%;background:linear-gradient(90deg,#3b6ef0,#5a4ff0);transition:.4s}
-  /* 闪卡 */
   .flash{min-height:160px;background:linear-gradient(135deg,#f7f9ff,#eef2ff);border-radius:16px;padding:22px;text-align:center;display:flex;flex-direction:column;justify-content:center;cursor:pointer;font-size:17px}
   .flash small{color:var(--muted);font-size:12px;display:block;margin-bottom:10px}
   .flash .a{margin-top:14px;padding-top:14px;border-top:1px dashed #c3cdec;color:var(--primary);font-weight:600;white-space:pre-wrap}
-  /* 表单 */
   label.fl{display:block;font-size:13px;color:var(--muted);margin:12px 0 5px}
   input[type=text],input[type=date],select,textarea{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;background:#fff}
   textarea{min-height:70px;resize:vertical}
   .hint{font-size:13px;color:var(--muted);margin-top:8px}
   .empty{text-align:center;color:var(--muted);padding:30px 10px;font-size:14px}
-  .pill{display:inline-block;background:#eef3ff;color:var(--primary);padding:3px 10px;border-radius:20px;font-size:12px;margin:2px}
   .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#1f2330;color:#fff;padding:11px 20px;border-radius:24px;font-size:14px;z-index:200;opacity:0;transition:.3s;pointer-events:none}
   .toast.show{opacity:.95}
   .modal{position:fixed;inset:0;background:rgba(20,25,45,.45);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
@@ -85,6 +79,20 @@
   .modal .box{background:#fff;border-radius:16px;padding:20px;max-width:420px;width:100%}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   @media(max-width:480px){.grid2{grid-template-columns:1fr}}
+  .paper-item{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:13px;margin-bottom:10px;cursor:pointer;transition:.12s}
+  .paper-item:hover{border-color:var(--primary);background:#f7f9ff}
+  .paper-item .pi-main{flex:1}
+  .paper-item .pi-title{font-weight:600;font-size:15px}
+  .paper-item .pi-sub{font-size:12px;color:var(--muted);margin-top:3px}
+  .warn-box{background:#fff6ea;border-left:3px solid var(--warn);border-radius:8px;padding:12px;font-size:14px;margin-bottom:10px}
+  .urgent-box{background:#fdecea;border-left:3px solid var(--err);border-radius:8px;padding:12px;font-size:14px;margin-bottom:10px}
+  .point-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;gap:10px}
+  .point-row:last-child{border-bottom:none}
+  .point-row .cnt{flex:0 0 auto;background:#fde8e7;color:#d4443e;font-size:12px;padding:2px 9px;border-radius:20px}
+  .seg{display:flex;gap:6px;margin-bottom:14px}
+  .seg button{flex:1;background:#eef1f8;border:none;padding:9px;border-radius:10px;cursor:pointer;font-size:14px;color:var(--text)}
+  .seg button.active{background:var(--primary);color:#fff;font-weight:600}
+  .disclaimer{font-size:12px;color:var(--muted);background:#f7f9ff;border-radius:10px;padding:10px 12px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -99,7 +107,8 @@
   </div>
   <nav id="nav">
     <button data-view="home" class="active">🏠 首页</button>
-    <button data-view="quiz">📝 刷题</button>
+    <button data-view="quiz">📝 章节刷题</button>
+    <button data-view="paper">📋 套题试卷</button>
     <button data-view="wrong">❌ 错题本</button>
     <button data-view="flash">🗂 闪卡复习</button>
     <button data-view="plan">✅ 学习计划</button>
@@ -109,26 +118,20 @@
 </header>
 
 <main>
-  <!-- 首页 -->
   <section id="view-home"></section>
-  <!-- 刷题 -->
   <section id="view-quiz" hidden></section>
-  <!-- 错题本 -->
+  <section id="view-paper" hidden></section>
   <section id="view-wrong" hidden></section>
-  <!-- 闪卡 -->
   <section id="view-flash" hidden></section>
-  <!-- 计划 -->
   <section id="view-plan" hidden></section>
-  <!-- 添加 -->
   <section id="view-add" hidden></section>
-  <!-- 数据 -->
   <section id="view-data" hidden></section>
 </main>
 
 <div class="toast" id="toast"></div>
 <div class="modal" id="modal">
   <div class="box">
-    <h2 style="margin-top:0" id="mTitle">设置考试日期</h2>
+    <h2 style="margin-top:0">设置考试日期</h2>
     <label class="fl">考试日期</label>
     <input type="date" id="examDate">
     <div class="hint">2026年中级会计考试一般在 9 月初。请按准考证为准修改。</div>
@@ -140,386 +143,699 @@
 </div>
 
 <script>
-/* ============ 科目定义 ============ */
+/* ===================== 科目定义 ===================== */
 const SUBJECTS = {
-  shiwu:   {name:"中级会计实务", short:"实务", color:"#3b6ef0"},
-  caiguan: {name:"财务管理",     short:"财管", color:"#1faa6c"},
-  jingjifa:{name:"经济法",       short:"经济法", color:"#f0a23b"},
+  shiwu:   {name:"中级会计实务", short:"实务"},
+  caiguan: {name:"财务管理",     short:"财管"},
+  jingjifa:{name:"经济法",       short:"经济法"},
 };
 
-/* ============ 内置题库（示例，可自行添加更多）============ */
-/* type: single 单选 / multi 多选 / judge 判断 ; answer: 单选&判断为字符串, 多选为数组 */
-const BUILTIN_QUESTIONS = [
-  // —— 中级会计实务 ——
-  {id:"b1",subject:"shiwu",chapter:"存货",type:"single",
-   stem:"企业在确定存货的可变现净值时，应以取得的可靠证据为基础。下列各项中，不应作为确定存货可变现净值依据的是（　）。",
-   options:["存货的成本","产成品的市场销售价格","为出售存货估计将发生的销售费用","完工产品的估计售价"],
-   answer:"A",explain:"可变现净值=估计售价−至完工估计成本−估计销售费用及税费。存货的“成本”本身不是可变现净值的计算依据，而是用来与可变现净值比较以确定是否计提跌价准备的。"},
-  {id:"b2",subject:"shiwu",chapter:"固定资产",type:"single",
-   stem:"下列关于固定资产折旧的说法中，正确的是（　）。",
-   options:["当月增加的固定资产，当月计提折旧","当月减少的固定资产，当月不计提折旧","已提足折旧仍继续使用的固定资产应继续计提折旧","处于更新改造过程停止使用的固定资产仍需计提折旧"],
-   answer:"A",explain:"当月增加的固定资产当月不提、下月起提；当月减少的当月仍提、下月起停。注意原题选项A表述应为“当月增加当月不提”，此处正确答案按准则：当月增加的固定资产当月不计提折旧——请以教材为准。已提足折旧的不再计提。"},
-  {id:"b3",subject:"shiwu",chapter:"收入",type:"judge",
-   stem:"判断：企业与客户之间的合同同时满足收入确认五步法相关条件时，才能确认收入。",
-   options:["正确","错误"],answer:"A",
-   explain:"正确。新收入准则采用“五步法”模型：①识别合同②识别履约义务③确定交易价格④分摊交易价格⑤履行履约义务时确认收入。"},
-  {id:"b4",subject:"shiwu",chapter:"金融资产",type:"multi",
-   stem:"下列各项中，应当划分为以摊余成本计量的金融资产应同时满足的条件有（　）。",
-   options:["业务模式以收取合同现金流量为目标","合同现金流量仅为本金和利息的支付","以公允价值计量且变动计入当期损益","管理层有意图持有至到期"],
-   answer:["A","B"],
-   explain:"以摊余成本计量需同时满足两个条件：①业务模式是“收取合同现金流量”；②合同现金流量特征是“本金+利息”(SPPI测试)。CD不属于条件。"},
-
-  // —— 财务管理 ——
-  {id:"b5",subject:"caiguan",chapter:"财务管理基础",type:"single",
-   stem:"下列各项中，能够反映企业获利能力的财务指标是（　）。",
-   options:["流动比率","资产负债率","总资产净利率","存货周转率"],
-   answer:"C",
-   explain:"总资产净利率=净利润/平均资产总额，反映获利能力。流动比率反映短期偿债能力，资产负债率反映长期偿债能力，存货周转率反映营运能力。"},
-  {id:"b6",subject:"caiguan",chapter:"货币时间价值",type:"single",
-   stem:"已知（F/P,10%,5）=1.6105，则（P/F,10%,5）约等于（　）。",
-   options:["0.6209","1.6105","0.6806","0.5645"],
-   answer:"A",
-   explain:"复利现值系数与复利终值系数互为倒数：(P/F,10%,5)=1/1.6105≈0.6209。"},
-  {id:"b7",subject:"caiguan",chapter:"筹资管理",type:"judge",
-   stem:"判断：在其他条件不变的情况下，企业经营杠杆系数越大，经营风险越大。",
-   options:["正确","错误"],answer:"A",
-   explain:"正确。经营杠杆系数(DOL)越大，息税前利润对销量变动的敏感度越高，经营风险越大。"},
-  {id:"b8",subject:"caiguan",chapter:"成本管理",type:"multi",
-   stem:"下列各项中，属于变动成本的有（　）。",
-   options:["直接材料","直接人工(计件工资)","按直线法计提的固定资产折旧","行政管理人员的月薪"],
-   answer:["A","B"],
-   explain:"变动成本随业务量成正比变动：直接材料、计件工资属于变动成本。直线法折旧、固定月薪属于固定成本。"},
-
-  // —— 经济法 ——
-  {id:"b9",subject:"jingjifa",chapter:"公司法",type:"single",
-   stem:"根据公司法律制度的规定，有限责任公司股东会会议作出修改公司章程的决议，必须经（　）。",
-   options:["代表二分之一以上表决权的股东通过","代表三分之二以上表决权的股东通过","全体股东一致通过","出席会议的股东过半数通过"],
-   answer:"B",
-   explain:"有限责任公司股东会对修改公司章程、增减注册资本、合并、分立、解散或变更公司形式作出决议，必须经代表三分之二以上表决权的股东通过。"},
-  {id:"b10",subject:"jingjifa",chapter:"票据法",type:"single",
-   stem:"根据票据法律制度，下列关于支票的表述中，正确的是（　）。",
-   options:["支票的出票人可以是任何单位和个人","支票限于见票即付，不得另行记载付款日期","支票的提示付款期限为自出票日起1个月","现金支票可以背书转让"],
-   answer:"B",
-   explain:"支票限于见票即付，不得另行记载付款日期，另行记载的无效。支票提示付款期限为自出票日起10日。现金支票不得背书转让。"},
-  {id:"b11",subject:"jingjifa",chapter:"增值税",type:"judge",
-   stem:"判断：小规模纳税人发生应税销售行为，一律不得开具增值税专用发票。",
-   options:["正确","错误"],answer:"B",
-   explain:"错误。小规模纳税人可以自行开具或申请代开增值税专用发票（销售自己使用过的固定资产等特殊情形除外）。"},
-  {id:"b12",subject:"jingjifa",chapter:"合伙企业法",type:"multi",
-   stem:"根据合伙企业法律制度，下列关于普通合伙人的表述中，正确的有（　）。",
-   options:["普通合伙人对合伙企业债务承担无限连带责任","合伙企业财产不足清偿债务时由普通合伙人承担","普通合伙人可以用劳务出资","普通合伙人只以出资额为限承担责任"],
-   answer:["A","B","C"],
-   explain:"普通合伙人承担无限连带责任，可以用货币、实物、知识产权、土地使用权或劳务出资。D项“以出资额为限”是有限合伙人/有限责任公司股东的特征，错误。"},
-];
-
-const FLASHCARDS = [
-  {subject:"shiwu",q:"会计要素有哪几个？",a:"资产、负债、所有者权益、收入、费用、利润 —— 共6个。前三个反映财务状况，后三个反映经营成果。"},
-  {subject:"shiwu",q:"存货可变现净值的计算公式？",a:"可变现净值 = 估计售价 − 至完工估计将发生的成本 − 估计的销售费用及相关税费。"},
-  {subject:"shiwu",q:"资产负债表的基本等式？",a:"资产 = 负债 + 所有者权益。这是复式记账和报表编制的基础。"},
-  {subject:"caiguan",q:"净现值(NPV)的决策规则？",a:"NPV>0 接受方案；NPV<0 拒绝；NPV=0 临界。NPV=未来现金流量现值−初始投资。"},
-  {subject:"caiguan",q:"加权平均资本成本(WACC)是什么？",a:"企业各种资金来源(债务、权益)按市场价值权重加权平均后的资本成本，是投资决策的最低报酬率门槛。"},
-  {subject:"caiguan",q:"总杠杆系数(DTL)的关系式？",a:"DTL = DOL × DFL（总杠杆=经营杠杆×财务杠杆）。反映销量变动对每股收益的综合影响。"},
-  {subject:"jingjifa",q:"诉讼时效一般期间是多久？",a:"民法典规定普通诉讼时效为3年，自权利人知道或应当知道权利受损及义务人之日起计算，最长不超过20年。"},
-  {subject:"jingjifa",q:"增值税一般纳税人和小规模纳税人主要区别？",a:"计税方法不同：一般纳税人用“销项−进项”抵扣计税；小规模按征收率简易计税，不得抵扣进项。"},
-];
-
+/* ===================== 章节列表 ===================== */
 const PLAN_CHAPTERS = {
-  shiwu:["第1章 概述","第2章 存货","第3章 固定资产","第4章 无形资产","第5章 投资性房地产","第6章 长期股权投资","第7章 金融资产","第8章 收入","第9章 职工薪酬","第10章 所得税","第11章 财务报告"],
+  shiwu:["第1章 总论","第2章 存货","第3章 固定资产","第4章 无形资产","第5章 投资性房地产","第6章 长期股权投资","第7章 金融资产","第8章 收入","第9章 职工薪酬","第10章 所得税","第11章 财务报告"],
   caiguan:["第1章 总论","第2章 财务管理基础","第3章 预算管理","第4章 筹资管理(上)","第5章 筹资管理(下)","第6章 投资管理","第7章 营运资金管理","第8章 成本管理","第9章 收入与分配管理","第10章 财务分析与评价"],
   jingjifa:["第1章 总论","第2章 公司法律制度","第3章 合伙企业法律制度","第4章 金融法律制度","第5章 合同法律制度","第6章 增值税法律制度","第7章 企业所得税法律制度","第8章 相关税收法律制度"],
 };
 
-/* ============ 状态存储 ============ */
-const LS_KEY = "zjkj_helper_v1";
-function loadState(){
-  try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }catch(e){ return {}; }
-}
+/* ===================== 章节题库 =====================
+   字段说明：
+   type: single单选 / multi多选 / judge判断
+   answer: 单选&判断为字母字符串; 多选为字母数组
+   src: "真题" / "模拟题"
+   level: "重点" / "难点" / "一般"
+   point: 知识点（用于错题分析与重点学习提示）
+   ⚠️ 税率、法条以当年官方教材为准
+====================================================== */
+const CHAPTER_QUESTIONS = [
+  /* —— 中级会计实务 —— */
+  {id:"s_cun_1",subject:"shiwu",chapter:"第2章 存货",point:"存货可变现净值",src:"模拟题",level:"重点",type:"single",
+   stem:"企业在确定存货的可变现净值时，下列各项中不应作为计算依据的是（　）。",
+   options:["产品的估计售价","至完工估计将发生的成本","估计的销售费用及相关税费","存货的历史成本"],
+   answer:"D",
+   explain:"可变现净值 = 估计售价 − 至完工估计将发生的成本 − 估计的销售费用及相关税费。存货的“历史成本”不是可变现净值的计算依据，而是用来与可变现净值比较、判断是否计提跌价准备。"},
+  {id:"s_gu_1",subject:"shiwu",chapter:"第3章 固定资产",point:"固定资产折旧",src:"模拟题",level:"重点",type:"single",
+   stem:"关于固定资产折旧，下列说法正确的是（　）。",
+   options:["当月增加的固定资产，当月计提折旧","当月减少的固定资产，当月不计提折旧","已提足折旧仍继续使用的，不再计提折旧","提前报废的固定资产应补提折旧"],
+   answer:"C",
+   explain:"规则：当月增加的当月不提、下月起提；当月减少的当月仍提、下月起停。已提足折旧仍使用的不再计提；提前报废也不补提折旧。故C正确。"},
+  {id:"s_wu_1",subject:"shiwu",chapter:"第4章 无形资产",point:"研究与开发支出",src:"模拟题",level:"重点",type:"judge",
+   stem:"判断：企业内部研究开发项目，研究阶段的支出应予以资本化，开发阶段的支出应费用化计入当期损益。",
+   options:["正确","错误"],answer:"B",
+   explain:"错误，说反了。研究阶段支出应“费用化”计入当期损益；开发阶段支出在满足资本化条件时才“资本化”确认为无形资产。"},
+  {id:"s_tou_1",subject:"shiwu",chapter:"第5章 投资性房地产",point:"投资性房地产计量模式",src:"模拟题",level:"难点",type:"judge",
+   stem:"判断：采用公允价值模式计量的投资性房地产，不计提折旧或摊销，但应按期与公允价值比较计提减值。",
+   options:["正确","错误"],answer:"B",
+   explain:"错误。公允价值模式下不计提折旧或摊销，也不计提减值，期末以公允价值计量，其变动计入“公允价值变动损益”。"},
+  {id:"s_chang_1",subject:"shiwu",chapter:"第6章 长期股权投资",point:"成本法与权益法",src:"模拟题",level:"难点",type:"single",
+   stem:"投资方对被投资单位能够实施控制的长期股权投资，在个别财务报表中应采用（　）核算。",
+   options:["成本法","权益法","公允价值法","摊余成本法"],
+   answer:"A",
+   explain:"能够“控制”（一般为子公司）的，个别报表采用成本法核算；具有“共同控制或重大影响”（合营、联营企业）的采用权益法。"},
+  {id:"s_jin_1",subject:"shiwu",chapter:"第7章 金融资产",point:"金融资产分类",src:"模拟题",level:"难点",type:"multi",
+   stem:"某项金融资产分类为“以摊余成本计量”，应同时满足的条件有（　）。",
+   options:["管理该资产的业务模式是以收取合同现金流量为目标","合同现金流量特征仅为本金和以本金为基础的利息支付","以公允价值计量且其变动计入当期损益","持有目的是近期出售获利"],
+   answer:["A","B"],
+   explain:"以摊余成本计量需同时满足：①业务模式为“收取合同现金流量”；②通过SPPI测试，即合同现金流量仅为本金和利息。CD描述的是以公允价值计量且变动计入当期损益的金融资产。"},
+  {id:"s_shou_1",subject:"shiwu",chapter:"第8章 收入",point:"收入确认五步法",src:"模拟题",level:"重点",type:"judge",
+   stem:"判断：新收入准则下，企业确认收入采用“五步法”模型，最后一步是在履行履约义务（即客户取得相关商品控制权）时确认收入。",
+   options:["正确","错误"],answer:"A",
+   explain:"正确。五步法：①识别合同 ②识别履约义务 ③确定交易价格 ④分摊交易价格 ⑤履行履约义务时确认收入。控制权转移是确认收入的核心标志。"},
+  {id:"s_suo_1",subject:"shiwu",chapter:"第10章 所得税",point:"暂时性差异",src:"模拟题",level:"难点",type:"single",
+   stem:"资产的账面价值大于其计税基础，将产生（　）。",
+   options:["应纳税暂时性差异，确认递延所得税负债","可抵扣暂时性差异，确认递延所得税资产","永久性差异","不产生暂时性差异"],
+   answer:"A",
+   explain:"资产账面价值>计税基础 → 应纳税暂时性差异 → 递延所得税负债；资产账面价值<计税基础 → 可抵扣暂时性差异 → 递延所得税资产。负债项目则相反。"},
+  {id:"s_bao_1",subject:"shiwu",chapter:"第11章 财务报告",point:"财务报表组成",src:"模拟题",level:"重点",type:"multi",
+   stem:"一套完整的财务报表至少应当包括（　）。",
+   options:["资产负债表","利润表","现金流量表","所有者权益变动表及附注"],
+   answer:["A","B","C","D"],
+   explain:"完整的财务报表包括：资产负债表、利润表、现金流量表、所有者权益（股东权益）变动表以及附注。四张报表加附注缺一不可。"},
+
+  /* —— 财务管理 —— */
+  {id:"c_li_1",subject:"caiguan",chapter:"第10章 财务分析与评价",point:"获利能力指标",src:"模拟题",level:"重点",type:"single",
+   stem:"下列财务比率中，用于反映企业获利能力的是（　）。",
+   options:["流动比率","资产负债率","总资产净利率","存货周转率"],
+   answer:"C",
+   explain:"总资产净利率=净利润/平均资产总额，反映获利能力。流动比率→短期偿债能力；资产负债率→长期偿债能力；存货周转率→营运能力。"},
+  {id:"c_shi_1",subject:"caiguan",chapter:"第2章 财务管理基础",point:"货币时间价值系数",src:"模拟题",level:"重点",type:"single",
+   stem:"已知（F/P,10%,5）=1.6105，则复利现值系数（P/F,10%,5）约为（　）。",
+   options:["0.6209","1.6105","0.5645","0.7513"],
+   answer:"A",
+   explain:"复利现值系数与复利终值系数互为倒数：(P/F,10%,5)=1/(F/P,10%,5)=1/1.6105≈0.6209。"},
+  {id:"c_gan_1",subject:"caiguan",chapter:"第2章 财务管理基础",point:"经营杠杆",src:"模拟题",level:"重点",type:"judge",
+   stem:"判断：其他条件不变时，经营杠杆系数（DOL）越大，企业的经营风险越大。",
+   options:["正确","错误"],answer:"A",
+   explain:"正确。DOL越大，息税前利润对销售量变动越敏感，经营风险越大。DOL=基期边际贡献/基期息税前利润。"},
+  {id:"c_bian_1",subject:"caiguan",chapter:"第8章 成本管理",point:"变动成本与固定成本",src:"模拟题",level:"重点",type:"multi",
+   stem:"下列成本项目中，通常属于变动成本的有（　）。",
+   options:["直接材料","按产量计酬的直接人工","直线法计提的厂房折旧","管理人员固定月薪"],
+   answer:["A","B"],
+   explain:"变动成本随业务量成正比变动：直接材料、计件（按产量）人工属于变动成本。直线法折旧、固定月薪不随产量变动，属于固定成本。"},
+  {id:"c_npv_1",subject:"caiguan",chapter:"第6章 投资管理",point:"净现值法",src:"模拟题",level:"重点",type:"single",
+   stem:"采用净现值（NPV）法评价投资项目，下列决策正确的是（　）。",
+   options:["NPV>0时应接受该项目","NPV<0时应接受该项目","NPV越小项目越好","NPV与是否接受项目无关"],
+   answer:"A",
+   explain:"NPV=未来现金流量现值−初始投资。NPV>0说明项目报酬率高于必要报酬率，应接受；NPV<0应拒绝。NPV越大越好。"},
+  {id:"c_wacc_1",subject:"caiguan",chapter:"第4章 筹资管理(上)",point:"加权平均资本成本",src:"模拟题",level:"难点",type:"single",
+   stem:"关于加权平均资本成本（WACC），下列说法正确的是（　）。",
+   options:["计算时按各种资金来源的账面价值确定权重最为合理","通常可作为投资项目可接受的最低报酬率","债务资本成本一般高于权益资本成本","与企业资本结构无关"],
+   answer:"B",
+   explain:"WACC是各类资金成本按权重加权平均，常作为投资项目必要报酬率的下限（门槛）。权重以市场价值确定更合理；一般债务成本低于权益成本；WACC与资本结构相关。"},
+  {id:"c_du_1",subject:"caiguan",chapter:"第10章 财务分析与评价",point:"杜邦分析体系",src:"模拟题",level:"难点",type:"single",
+   stem:"在杜邦分析体系中，净资产收益率（权益净利率）等于（　）。",
+   options:["销售净利率×总资产周转率×权益乘数","销售净利率×资产负债率","总资产周转率×流动比率","营业利润率×产权比率"],
+   answer:"A",
+   explain:"杜邦体系核心：净资产收益率=销售净利率×总资产周转率×权益乘数，分别反映盈利、营运、财务杠杆三方面。"},
+  {id:"c_yu_1",subject:"caiguan",chapter:"第7章 营运资金管理",point:"现金持有动机",src:"模拟题",level:"一般",type:"multi",
+   stem:"企业持有现金的动机一般包括（　）。",
+   options:["交易性动机","预防性动机","投机性动机","盈利性动机"],
+   answer:["A","B","C"],
+   explain:"企业持有现金的三大动机：交易性动机（日常支付）、预防性动机（应对意外）、投机性动机（抓住获利机会）。无“盈利性动机”这一标准说法。"},
+
+  /* —— 经济法 —— */
+  {id:"j_gong_1",subject:"jingjifa",chapter:"第2章 公司法律制度",point:"股东会特别决议",src:"模拟题",level:"重点",type:"single",
+   stem:"有限责任公司股东会作出修改公司章程的决议，必须经（　）。",
+   options:["代表二分之一以上表决权的股东通过","代表三分之二以上表决权的股东通过","出席会议股东过半数通过","全体股东一致通过"],
+   answer:"B",
+   explain:"修改章程、增减注册资本、合并、分立、解散或变更公司形式，属于特别决议事项，须经代表三分之二以上表决权的股东通过。"},
+  {id:"j_piao_1",subject:"jingjifa",chapter:"第4章 金融法律制度",point:"支票",src:"模拟题",level:"重点",type:"single",
+   stem:"根据票据法律制度，下列关于支票的表述正确的是（　）。",
+   options:["支票可以另行记载付款日期","支票限于见票即付，不得另行记载付款日期","支票提示付款期限为自出票日起1个月","现金支票可以背书转让"],
+   answer:"B",
+   explain:"支票限于见票即付，不得另行记载付款日期，记载者无效。支票提示付款期限为自出票日起10日。现金支票不得背书转让（转账支票可）。"},
+  {id:"j_xiao_1",subject:"jingjifa",chapter:"第6章 增值税法律制度",point:"小规模纳税人专票",src:"模拟题",level:"一般",type:"judge",
+   stem:"判断：小规模纳税人发生应税销售行为，一律不得开具增值税专用发票。",
+   options:["正确","错误"],answer:"B",
+   explain:"错误。小规模纳税人可以自行开具或申请代开增值税专用发票（销售自己使用过的固定资产等特殊情形除外）。"},
+  {id:"j_he_1",subject:"jingjifa",chapter:"第3章 合伙企业法律制度",point:"普通合伙人",src:"模拟题",level:"重点",type:"multi",
+   stem:"根据合伙企业法律制度，下列关于普通合伙人的表述正确的有（　）。",
+   options:["对合伙企业债务承担无限连带责任","合伙企业财产不足清偿到期债务的，由普通合伙人承担","可以用劳务出资","仅以认缴出资额为限承担责任"],
+   answer:["A","B","C"],
+   explain:"普通合伙人承担无限连带责任，可用货币、实物、知识产权、土地使用权或劳务出资。D“以出资额为限”是有限合伙人/公司股东的特征。"},
+  {id:"j_shi_1",subject:"jingjifa",chapter:"第5章 合同法律制度",point:"诉讼时效",src:"模拟题",level:"重点",type:"single",
+   stem:"根据民法典，向人民法院请求保护民事权利的普通诉讼时效期间一般为（　）。",
+   options:["1年","2年","3年","5年"],
+   answer:"C",
+   explain:"民法典规定普通诉讼时效为3年，自权利人知道或应当知道权利受损及义务人之日起算，最长保护期不超过20年。"},
+  {id:"j_suo_1",subject:"jingjifa",chapter:"第7章 企业所得税法律制度",point:"企业所得税税率",src:"模拟题",level:"重点",type:"single",
+   stem:"我国企业所得税的基本税率为（　）。（以当年税法为准）",
+   options:["15%","20%","25%","33%"],
+   answer:"C",
+   explain:"企业所得税基本税率为25%。符合条件的小型微利企业、高新技术企业等适用优惠税率（如20%、15%），具体以当年税收政策为准。"},
+];
+
+/* ===================== 套题/试卷库 =====================
+   每张试卷是一组题目；做错的题进入“套题错题本”（与章节错题分开）
+   每道题 id 唯一，便于错题收录
+====================================================== */
+const PAPERS = [
+  /* ---- 实务 模拟卷一 ---- */
+  {id:"P_s_1",subject:"shiwu",title:"中级会计实务·模拟卷（一）",src:"模拟题",
+   questions:[
+     {id:"P_s_1_1",type:"single",point:"会计要素",level:"一般",
+      stem:"下列各项中，属于反映企业经营成果的会计要素是（　）。",
+      options:["资产","负债","所有者权益","收入"],answer:"D",
+      explain:"反映经营成果的要素：收入、费用、利润。资产、负债、所有者权益反映财务状况。"},
+     {id:"P_s_1_2",type:"single",point:"存货初始计量",level:"重点",
+      stem:"企业外购存货，下列各项中应计入存货成本的是（　）。",
+      options:["购买价款及相关税费","可抵扣的增值税进项税额","仓储部门管理费用","非正常损耗"],
+      answer:"A",
+      explain:"外购存货成本=购买价款+相关税费+运输、装卸、保险等可归属费用。可抵扣进项税不计入；非正常损耗计入营业外支出；一般仓储费用计入当期损益。"},
+     {id:"P_s_1_3",type:"single",point:"固定资产折旧方法",level:"重点",
+      stem:"下列折旧方法中，属于加速折旧法的是（　）。",
+      options:["年限平均法","工作量法","双倍余额递减法","直线法"],
+      answer:"C",
+      explain:"加速折旧法包括双倍余额递减法和年数总和法，前期多提、后期少提。年限平均法（直线法）、工作量法不属于加速折旧。"},
+     {id:"P_s_1_4",type:"multi",point:"资产减值",level:"难点",
+      stem:"下列资产计提的减值准备，以后期间不得转回的有（　）。",
+      options:["固定资产减值准备","无形资产减值准备","存货跌价准备","应收账款坏账准备"],
+      answer:["A","B"],
+      explain:"固定资产、无形资产等长期资产减值一经计提，以后期间不得转回。存货跌价准备、坏账准备在价值恢复时可在已计提范围内转回。"},
+     {id:"P_s_1_5",type:"judge",point:"会计基础",level:"重点",
+      stem:"判断：权责发生制要求凡是当期已经实现的收入和已经发生或应当负担的费用，不论款项是否收付，都应作为当期的收入和费用。",
+      options:["正确","错误"],answer:"A",
+      explain:"正确，这是权责发生制的标准表述。与之相对的是收付实现制（以款项实际收付为标准）。"},
+     {id:"P_s_1_6",type:"single",point:"收入确认",level:"重点",
+      stem:"在某一时点确认收入时，最关键的判断标志是（　）。",
+      options:["客户取得相关商品控制权","开具发票","收到货款","签订合同"],
+      answer:"A",
+      explain:"新收入准则以“控制权转移”作为确认收入的标志，而非发票、收款或签合同。"},
+   ]},
+  /* ---- 实务 模拟卷二 ---- */
+  {id:"P_s_2",subject:"shiwu",title:"中级会计实务·模拟卷（二）",src:"模拟题",
+   questions:[
+     {id:"P_s_2_1",type:"single",point:"无形资产摊销",level:"重点",
+      stem:"使用寿命不确定的无形资产，下列处理正确的是（　）。",
+      options:["按10年摊销","不摊销，但每年进行减值测试","按5年摊销","计入当期损益"],
+      answer:"B",
+      explain:"使用寿命不确定的无形资产不予摊销，但应在每个会计期末进行减值测试。使用寿命有限的才按期摊销。"},
+     {id:"P_s_2_2",type:"single",point:"长期股权投资权益法",level:"难点",
+      stem:"采用权益法核算长期股权投资，被投资单位实现净利润时，投资方应（　）。",
+      options:["按持股比例确认投资收益，增加长期股权投资账面价值","确认为公允价值变动损益","不作账务处理","冲减长期股权投资成本"],
+      answer:"A",
+      explain:"权益法下，被投资单位实现净利润，投资方按持股比例确认投资收益并调增长投账面价值；被投资单位宣告分红时再冲减长投。"},
+     {id:"P_s_2_3",type:"multi",point:"所有者权益",level:"一般",
+      stem:"下列各项中，属于所有者权益的有（　）。",
+      options:["实收资本（股本）","资本公积","盈余公积","应付债券"],
+      answer:["A","B","C"],
+      explain:"所有者权益包括实收资本（股本）、资本公积、其他综合收益、盈余公积和未分配利润。应付债券属于负债。"},
+     {id:"P_s_2_4",type:"judge",point:"或有事项",level:"难点",
+      stem:"判断：企业对未决诉讼很可能败诉并需赔偿、且金额能可靠计量的，应确认预计负债。",
+      options:["正确","错误"],answer:"A",
+      explain:"正确。同时满足“是现时义务、很可能导致经济利益流出、金额能可靠计量”三条件时确认预计负债。"},
+     {id:"P_s_2_5",type:"single",point:"财务报表列报",level:"重点",
+      stem:"资产负债表中，下列项目应列示为流动资产的是（　）。",
+      options:["预计1年内变现的交易性金融资产","固定资产","长期股权投资","无形资产"],
+      answer:"A",
+      explain:"预计在1年内（含）变现、出售或耗用的资产为流动资产，如交易性金融资产、应收账款、存货。固定资产、长投、无形资产为非流动资产。"},
+   ]},
+
+  /* ---- 财管 模拟卷一 ---- */
+  {id:"P_c_1",subject:"caiguan",title:"财务管理·模拟卷（一）",src:"模拟题",
+   questions:[
+     {id:"P_c_1_1",type:"single",point:"财务管理目标",level:"重点",
+      stem:"目前理财理论中，被广泛接受的财务管理最优目标是（　）。",
+      options:["利润最大化","每股收益最大化","企业价值（股东财富）最大化","销售收入最大化"],
+      answer:"C",
+      explain:"企业价值最大化（股东财富最大化）综合考虑了风险、时间价值和长远发展，克服了利润最大化、每股收益最大化的局限，被广泛接受。"},
+     {id:"P_c_1_2",type:"single",point:"年金现值",level:"难点",
+      stem:"某项目每年年末收款10万元，连续5年，年利率8%，（P/A,8%,5）=3.9927，则这笔款项的现值为（　）万元。",
+      options:["39.927","50","32.5","21.6"],
+      answer:"A",
+      explain:"普通年金现值=年金×年金现值系数=10×3.9927=39.927万元。"},
+     {id:"P_c_1_3",type:"multi",point:"风险与收益",level:"重点",
+      stem:"下列指标中，可用于衡量一项资产风险大小的有（　）。",
+      options:["标准差","方差","标准离差率","期望值"],
+      answer:["A","B","C"],
+      explain:"方差、标准差、标准离差率（变异系数）都可衡量风险；标准离差率适合比较期望值不同的方案。期望值衡量的是预期收益水平，不是风险。"},
+     {id:"P_c_1_4",type:"judge",point:"财务杠杆",level:"重点",
+      stem:"判断：在一定条件下，企业负债比重越高，财务杠杆系数越大，财务风险越高。",
+      options:["正确","错误"],answer:"A",
+      explain:"正确。负债越多、固定利息费用越大，财务杠杆系数（DFL）越大，普通股每股收益对息税前利润变动越敏感，财务风险越高。"},
+     {id:"P_c_1_5",type:"single",point:"现金流量",level:"难点",
+      stem:"在项目投资决策中，计算项目现金流量时，下列项目应作为现金流出处理的是（　）。",
+      options:["营业现金净流量","回收的固定资产残值","回收的流动资金","垫支的流动资金"],
+      answer:"D",
+      explain:"项目初始期垫支的流动资金属于现金流出；项目终结期回收流动资金、回收残值属于现金流入；经营期营业现金净流量为流入。"},
+   ]},
+  /* ---- 财管 模拟卷二 ---- */
+  {id:"P_c_2",subject:"caiguan",title:"财务管理·模拟卷（二）",src:"模拟题",
+   questions:[
+     {id:"P_c_2_1",type:"single",point:"营运资金管理",level:"重点",
+      stem:"营运资金=流动资产−流动负债。下列业务中，会导致企业营运资金增加的是（　）。",
+      options:["用长期借款偿还短期借款","用现金购买原材料","用银行存款偿还短期借款","用现金购买短期债券"],
+      answer:"A",
+      explain:"营运资金=流动资产−流动负债。A.用长期借款偿还短期借款：流动负债减少而流动资产不变→营运资金增加。B、D是流动资产内部一增一减，C是流动资产与流动负债等额减少，三者均不改变营运资金。"},
+     {id:"P_c_2_2",type:"single",point:"债券估价",level:"难点",
+      stem:"其他条件不变，当市场利率高于债券票面利率时，债券的发行价格通常（　）。",
+      options:["高于面值（溢价）","等于面值（平价）","低于面值（折价）","无法确定"],
+      answer:"C",
+      explain:"市场利率>票面利率时，债券吸引力下降，需折价发行（价格低于面值）；市场利率<票面利率时溢价发行；相等时平价发行。"},
+     {id:"P_c_2_3",type:"multi",point:"股利政策",level:"一般",
+      stem:"下列各项中，属于股利政策类型的有（　）。",
+      options:["剩余股利政策","固定或稳定增长股利政策","固定股利支付率政策","低正常股利加额外股利政策"],
+      answer:["A","B","C","D"],
+      explain:"四种基本股利政策：剩余股利政策、固定或稳定增长股利政策、固定股利支付率政策、低正常股利加额外股利政策。"},
+     {id:"P_c_2_4",type:"judge",point:"本量利分析",level:"重点",
+      stem:"判断：保本点（盈亏临界点）是指企业利润为零时的业务量，此时贡献毛益等于固定成本。",
+      options:["正确","错误"],answer:"A",
+      explain:"正确。保本点处利润=0，边际贡献（贡献毛益）恰好等于固定成本。保本量=固定成本/单位边际贡献。"},
+     {id:"P_c_2_5",type:"single",point:"标准成本差异",level:"难点",
+      stem:"直接材料价格差异的计算公式是（　）。",
+      options:["（实际价格−标准价格）×实际用量","（实际用量−标准用量）×标准价格","（实际价格−标准价格）×标准用量","实际成本−标准成本"],
+      answer:"A",
+      explain:"材料价格差异=（实际价格−标准价格）×实际用量；材料数量差异=（实际用量−标准用量）×标准价格。注意价格差异用实际用量、数量差异用标准价格。"},
+   ]},
+
+  /* ---- 经济法 模拟卷一 ---- */
+  {id:"P_j_1",subject:"jingjifa",title:"经济法·模拟卷（一）",src:"模拟题",
+   questions:[
+     {id:"P_j_1_1",type:"single",point:"法律行为效力",level:"重点",
+      stem:"根据民法典，下列民事法律行为中，属于无效的是（　）。",
+      options:["限制民事行为能力人独立实施的与其年龄相适应的行为","行为人与相对人以虚假意思表示实施的行为","因重大误解实施的行为","显失公平的行为"],
+      answer:"B",
+      explain:"以虚假意思表示（通谋虚伪）实施的民事法律行为无效。重大误解、显失公平属于可撤销；与年龄智力相适应的行为有效。"},
+     {id:"P_j_1_2",type:"single",point:"汇票承兑",level:"难点",
+      stem:"根据票据法，付款人对向其提示承兑的汇票，应当自收到提示承兑之日起（　）内承兑或拒绝承兑。",
+      options:["3日","5日","10日","1个月"],
+      answer:"A",
+      explain:"付款人收到提示承兑的汇票，应自收到之日起3日内承兑或拒绝承兑。"},
+     {id:"P_j_1_3",type:"multi",point:"公司设立",level:"重点",
+      stem:"根据公司法，下列关于股份有限公司的表述正确的有（　）。",
+      options:["可以采取发起设立或募集设立方式","股东以其认购的股份为限对公司承担责任","公司以其全部财产对债务承担责任","必须设立监事会"],
+      answer:["A","B","C"],
+      explain:"股份公司可发起设立或募集设立；股东以认购股份为限担责；公司以全部财产担责。是否必须设监事会依公司法及规模而定，不能一概而论，故D不选。（以现行公司法为准）"},
+     {id:"P_j_1_4",type:"judge",point:"合同订立",level:"一般",
+      stem:"判断：要约是希望与他人订立合同的意思表示，承诺生效时合同成立。",
+      options:["正确","错误"],answer:"A",
+      explain:"正确。要约是订立合同的意思表示，受要约人作出承诺，承诺生效时合同成立（一般以承诺到达要约人时生效）。"},
+     {id:"P_j_1_5",type:"single",point:"增值税税率",level:"难点",
+      stem:"一般纳税人销售或进口一般货物，适用的增值税基本税率为（　）。（以当年税法为准）",
+      options:["6%","9%","13%","3%"],
+      answer:"C",
+      explain:"现行增值税一般纳税人基本税率为13%（多数货物）；9%适用于交通运输、不动产、农产品等；6%适用于部分现代服务；3%为小规模征收率。具体以当年政策为准。"},
+   ]},
+  /* ---- 经济法 模拟卷二 ---- */
+  {id:"P_j_2",subject:"jingjifa",title:"经济法·模拟卷（二）",src:"模拟题",
+   questions:[
+     {id:"P_j_2_1",type:"single",point:"有限合伙",level:"难点",
+      stem:"根据合伙企业法，下列关于有限合伙人的表述正确的是（　）。",
+      options:["以其认缴的出资额为限对合伙债务承担责任","对合伙债务承担无限连带责任","可以用劳务出资","执行合伙事务"],
+      answer:"A",
+      explain:"有限合伙人以其认缴出资额为限担责，不得以劳务出资，不执行合伙事务。承担无限连带责任、可劳务出资、执行事务的是普通合伙人。"},
+     {id:"P_j_2_2",type:"single",point:"诉讼时效中断",level:"重点",
+      stem:"下列情形中，能引起诉讼时效中断的是（　）。",
+      options:["权利人向义务人提出履行请求","发生不可抗力","权利人被限制人身自由","继承开始后未确定继承人"],
+      answer:"A",
+      explain:"诉讼时效中断的事由：权利人提出请求、义务人同意履行、提起诉讼或仲裁等。BCD属于诉讼时效中止的事由。"},
+     {id:"P_j_2_3",type:"multi",point:"企业所得税扣除",level:"难点",
+      stem:"计算企业所得税应纳税所得额时，下列支出准予据实或限额扣除的有（　）。",
+      options:["合理的工资薪金支出","符合条件的公益性捐赠（限额内）","税收滞纳金","向投资者支付的股息红利"],
+      answer:["A","B"],
+      explain:"合理工资薪金据实扣除；公益性捐赠在年度利润总额12%以内部分准予扣除（超过部分可结转3年）。税收滞纳金、向投资者分配的股息红利不得税前扣除。"},
+     {id:"P_j_2_4",type:"judge",point:"票据权利时效",level:"难点",
+      stem:"判断：持票人对支票出票人的权利，自出票日起6个月不行使而消灭。",
+      options:["正确","错误"],answer:"A",
+      explain:"正确。持票人对支票出票人的票据权利，自出票日起6个月内不行使即消灭。"},
+     {id:"P_j_2_5",type:"single",point:"个人所得税",level:"重点",
+      stem:"下列所得中，按“工资、薪金所得”并入综合所得计征个人所得税的是（　）。（以当年税法为准）",
+      options:["任职受雇取得的奖金","个体工商户生产经营所得","财产转让所得","利息股息红利所得"],
+      answer:"A",
+      explain:"工资、薪金（含奖金）、劳务报酬、稿酬、特许权使用费四项为综合所得，按年合并计税。经营所得、财产转让、利息股息红利等单独计税。"},
+   ]},
+];
+
+/* ===================== 闪卡 ===================== */
+const FLASHCARDS = [
+  {subject:"shiwu",q:"会计要素有哪几个？",a:"资产、负债、所有者权益、收入、费用、利润——共6个。前三个反映财务状况，后三个反映经营成果。"},
+  {subject:"shiwu",q:"存货可变现净值的公式？",a:"可变现净值 = 估计售价 − 至完工估计成本 − 估计销售费用及相关税费。"},
+  {subject:"shiwu",q:"暂时性差异如何确认递延所得税？",a:"应纳税暂时性差异→递延所得税负债；可抵扣暂时性差异→递延所得税资产。"},
+  {subject:"caiguan",q:"净现值(NPV)决策规则？",a:"NPV>0接受，NPV<0拒绝，NPV越大越好。NPV=未来现金流量现值−初始投资。"},
+  {subject:"caiguan",q:"杜邦体系：净资产收益率分解？",a:"净资产收益率=销售净利率×总资产周转率×权益乘数（盈利×营运×杠杆）。"},
+  {subject:"caiguan",q:"总杠杆系数(DTL)关系？",a:"DTL = DOL × DFL（总杠杆=经营杠杆×财务杠杆）。"},
+  {subject:"jingjifa",q:"普通诉讼时效是多久？",a:"民法典规定为3年，自知道或应当知道权利受损及义务人起算，最长不超过20年。"},
+  {subject:"jingjifa",q:"有限责任公司特别决议事项需多少表决权通过？",a:"修改章程、增减注册资本、合并、分立、解散或变更公司形式，须经代表三分之二以上表决权的股东通过。"},
+];
+
+/* ===================== 状态存储 ===================== */
+const LS_KEY = "zjkj_helper_v2";
+const URGE_DAYS = 3; // 错题超过这么多天未学习→加强提示
+function loadState(){ try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return{};} }
 function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
 let state = loadState();
-state.examDate = state.examDate || "2026-09-05";
-state.wrong = state.wrong || {};        // {qid: 错误次数}
-state.answered = state.answered || 0;   // 总答题数
-state.correct = state.correct || 0;     // 总正确数
-state.custom = state.custom || [];      // 自定义题目
-state.plan = state.plan || {};          // {chapKey:true}
-state.studyDays = state.studyDays || []; // 学习日期列表 "YYYY-MM-DD"
-state.flashSched = state.flashSched || {}; // {cardIndex:{due:date,level:n}}
+state.examDate   = state.examDate   || "2026-09-05";
+state.answered   = state.answered   || 0;
+state.correct    = state.correct    || 0;
+state.custom     = state.custom     || [];
+state.plan       = state.plan       || {};   // {key:true}
+state.planDate   = state.planDate   || {};   // {key:"日期"} 打勾日期
+state.studyDays  = state.studyDays  || [];
+state.flashSched = state.flashSched || {};
+state.wrong      = state.wrong      || {};   // 章节错题 {qid:{c,added,last}}
+state.wrongPaper = state.wrongPaper || {};   // 套题错题 {qid:{c,added,last}}
+state.paperDone  = state.paperDone  || {};   // {paperId:{score,total,date}}
+/* 兼容旧版（v1 错题为数字）*/
+Object.keys(state.wrong).forEach(k=>{ if(typeof state.wrong[k]==="number") state.wrong[k]={c:state.wrong[k],added:todayStr0(),last:todayStr0()}; });
 saveState();
 
-let curSubject = "shiwu";   // 当前科目（刷题/计划/添加用）
-let quizPool = [];          // 当前刷题序列
-let quizIdx = 0;
-let quizMode = "all";       // all / wrong
+function todayStr0(){ return new Date().toISOString().slice(0,10); }
 
-/* ============ 工具函数 ============ */
+let curSubject = "shiwu";
+let quizPool=[], quizIdx=0, quizScope="chapter", curPaperId=null;
+let runStat={correct:0,total:0};
+let curSelection=null;
+
+/* ===================== 工具 ===================== */
 const $ = s=>document.querySelector(s);
 const todayStr = ()=> new Date().toISOString().slice(0,10);
-function allQuestions(){ return BUILTIN_QUESTIONS.concat(state.custom); }
-function getQ(id){ return allQuestions().find(q=>q.id===id); }
-function markStudyToday(){ const t=todayStr(); if(!state.studyDays.includes(t)){state.studyDays.push(t);} }
-function streak(){
-  if(!state.studyDays.length) return 0;
-  let s=new Set(state.studyDays), n=0, d=new Date();
-  while(s.has(d.toISOString().slice(0,10))){ n++; d.setDate(d.getDate()-1); }
-  return n;
+function allQuestions(){ return CHAPTER_QUESTIONS.concat(state.custom); }
+function allPaperQuestions(){ return PAPERS.flatMap(p=>p.questions.map(q=>({...q,subject:p.subject,paperId:p.id,paperTitle:p.title,src:p.src}))); }
+function getQ(id){
+  return allQuestions().find(q=>q.id===id) || allPaperQuestions().find(q=>q.id===id);
 }
-function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1700); }
+function markStudyToday(){ const t=todayStr(); if(!state.studyDays.includes(t))state.studyDays.push(t); }
+function streak(){ if(!state.studyDays.length)return 0; let s=new Set(state.studyDays),n=0,d=new Date();
+  while(s.has(d.toISOString().slice(0,10))){n++;d.setDate(d.getDate()-1);} return n; }
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),1700); }
+function refreshCountdown(){ const diff=Math.ceil((new Date(state.examDate)-new Date(todayStr()))/86400000); $("#cdDays").textContent=diff>=0?diff:"已过"; }
+function daysSince(d){ return Math.floor((new Date(todayStr())-new Date(d))/86400000); }
+function escapeHtml(s){ return (s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+function srcTag(src){ return src==="真题"?'<span class="tag zhenti">真题</span>':'<span class="tag moni">模拟题</span>'; }
+function levelTag(lv){ if(lv==="重点")return '<span class="tag zhongdian">重点</span>'; if(lv==="难点")return '<span class="tag nandian">难点</span>'; return ''; }
 
-function refreshCountdown(){
-  const diff = Math.ceil((new Date(state.examDate) - new Date(todayStr()))/86400000);
-  $("#cdDays").textContent = diff>=0 ? diff : "已过";
+/* 判断某错题对应章节是否“在出错之后已学习” */
+function chapterStudiedAfter(subject,chapter,sinceDate){
+  if(!chapter)return false;
+  const chs=PLAN_CHAPTERS[subject]||[];
+  for(let i=0;i<chs.length;i++){
+    if(chs[i]===chapter || chs[i].includes(chapter) || chapter.includes(chs[i])){
+      const key=subject+"_"+i, d=state.planDate[key];
+      if(d && d>=sinceDate) return true;
+    }
+  }
+  return false;
 }
 
-/* ============ 视图切换 ============ */
-const views = ["home","quiz","wrong","flash","plan","add","data"];
+/* ===================== 视图切换 ===================== */
+const views=["home","quiz","paper","wrong","flash","plan","add","data"];
 function show(v){
-  views.forEach(x=>{ $("#view-"+x).hidden = (x!==v); });
-  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active", b.dataset.view===v));
+  views.forEach(x=>$("#view-"+x).hidden=(x!==v));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
   window.scrollTo(0,0);
-  if(v==="home")renderHome();
-  if(v==="quiz")renderQuizStart();
-  if(v==="wrong")renderWrong();
-  if(v==="flash")renderFlash();
-  if(v==="plan")renderPlan();
-  if(v==="add")renderAdd();
-  if(v==="data")renderData();
+  ({home:renderHome,quiz:renderQuizStart,paper:renderPaperList,wrong:renderWrong,flash:renderFlash,plan:renderPlan,add:renderAdd,data:renderData}[v])();
 }
-document.querySelectorAll("#nav button").forEach(b=> b.onclick=()=>show(b.dataset.view));
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.view));
 
-/* ============ 首页 ============ */
+/* ===================== 首页（含智能学习提示）===================== */
+function analyzeWrong(){
+  // 汇总两类错题 → 知识点统计 + 加强提示
+  const points={}; const urgent=[];
+  [["章节",state.wrong],["套题",state.wrongPaper]].forEach(([scope,map])=>{
+    Object.keys(map).forEach(id=>{
+      const q=getQ(id); if(!q)return;
+      const rec=map[id];
+      const pt=q.point||q.chapter||"其他";
+      if(!points[pt])points[pt]={cnt:0,subject:q.subject};
+      points[pt].cnt+=rec.c||1;
+      // 加强提示：超过URGE_DAYS天 且 对应章节未在出错后学习
+      const since=rec.added||todayStr();
+      if(daysSince(since)>=URGE_DAYS && !chapterStudiedAfter(q.subject,q.chapter,since)){
+        urgent.push({pt,subject:q.subject,chapter:q.chapter,days:daysSince(since),scope});
+      }
+    });
+  });
+  const ranked=Object.entries(points).map(([pt,o])=>({pt,...o})).sort((a,b)=>b.cnt-a.cnt);
+  return {ranked,urgent};
+}
 function renderHome(){
   refreshCountdown();
-  const acc = state.answered ? Math.round(state.correct/state.answered*100) : 0;
-  const dueFlash = flashDueCount();
-  let subjStats = Object.keys(SUBJECTS).map(k=>{
-    const total = PLAN_CHAPTERS[k].length;
-    const done = PLAN_CHAPTERS[k].filter((_,i)=>state.plan[k+"_"+i]).length;
-    const pct = Math.round(done/total*100);
-    return `<div style="margin-bottom:12px">
-      <div style="display:flex;justify-content:space-between;font-size:14px">
-        <span><b>${SUBJECTS[k].name}</b></span><span style="color:var(--muted)">${done}/${total} 章 · ${pct}%</span>
-      </div>
+  const acc=state.answered?Math.round(state.correct/state.answered*100):0;
+  const {ranked,urgent}=analyzeWrong();
+  const dueFlash=flashDueCount();
+
+  let subjStats=Object.keys(SUBJECTS).map(k=>{
+    const total=PLAN_CHAPTERS[k].length, done=PLAN_CHAPTERS[k].filter((_,i)=>state.plan[k+"_"+i]).length;
+    const pct=Math.round(done/total*100);
+    return `<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:14px">
+      <span><b>${SUBJECTS[k].name}</b></span><span style="color:var(--muted)">${done}/${total}章 · ${pct}%</span></div>
       <div class="progbar"><i style="width:${pct}%"></i></div></div>`;
   }).join("");
 
-  $("#view-home").innerHTML = `
-    <div class="card">
-      <h2>👋 加油，你正在备考中级会计师</h2>
+  // 重点学习提示
+  let studyTip="";
+  if(ranked.length){
+    studyTip=`<div class="card"><h2>🎯 根据错题，建议你重点学习</h2>
+      ${ranked.slice(0,6).map(r=>`<div class="point-row">
+        <span><span class="tag">${SUBJECTS[r.subject].short}</span> ${escapeHtml(r.pt)}</span>
+        <span class="cnt">错 ${r.cnt} 次</span></div>`).join("")}
+      <button class="btn ghost block sm" style="margin-top:12px" onclick="show('wrong')">去攻克错题 →</button></div>`;
+  }
+  // 加强提示
+  let urgentTip="";
+  if(urgent.length){
+    const uniq={}; urgent.forEach(u=>{const key=u.subject+"|"+(u.chapter||u.pt); if(!uniq[key]||u.days>uniq[key].days)uniq[key]=u;});
+    const list=Object.values(uniq).sort((a,b)=>b.days-a.days).slice(0,6);
+    urgentTip=`<div class="card"><h2 style="color:var(--err)">⏰ 加强提示：这些错题已 ${URGE_DAYS} 天+ 未复习</h2>
+      ${list.map(u=>`<div class="urgent-box">📌 <b>${escapeHtml(u.chapter||u.pt)}</b>（${SUBJECTS[u.subject].short}）—— 错了 <b>${u.days}</b> 天还没去学，赶紧攻克！</div>`).join("")}
+      <div style="display:flex;gap:10px;margin-top:6px">
+        <button class="btn sm" style="flex:1" onclick="show('wrong')">去做错题</button>
+        <button class="btn ghost sm" style="flex:1" onclick="show('plan')">去章节打卡</button></div></div>`;
+  }
+
+  $("#view-home").innerHTML=`
+    <div class="card"><h2>👋 加油，你正在备考中级会计师</h2>
       <div class="row">
         <div class="stat"><div class="num">${$("#cdDays").textContent}</div><div class="lbl">距考试天数</div></div>
         <div class="stat"><div class="num">${streak()}</div><div class="lbl">连续学习天数 🔥</div></div>
         <div class="stat"><div class="num">${state.answered}</div><div class="lbl">累计做题</div></div>
         <div class="stat"><div class="num">${acc}%</div><div class="lbl">正确率</div></div>
-      </div>
+      </div></div>
+    ${urgentTip}
+    ${studyTip}
+    <div class="card"><h2>📚 各科学习进度</h2>${subjStats}</div>
+    <div class="card"><h2>🚀 今天可以做的</h2>
+      <button class="btn block" style="margin-bottom:10px" onclick="show('quiz')">📝 章节刷题（${allQuestions().length}题）</button>
+      <button class="btn ghost block" style="margin-bottom:10px" onclick="show('paper')">📋 套题试卷（${PAPERS.length}套）</button>
+      <button class="btn ghost block" style="margin-bottom:10px" onclick="show('flash')">🗂 闪卡复习${dueFlash?`（今天${dueFlash}张待复习）`:""}</button>
     </div>
-    <div class="card">
-      <h2>📚 各科学习进度</h2>
-      ${subjStats}
-    </div>
-    <div class="card">
-      <h2>🎯 今天可以做的</h2>
-      <button class="btn block" style="margin-bottom:10px" onclick="show('quiz')">📝 开始刷题（共 ${allQuestions().length} 题）</button>
-      <button class="btn ghost block" style="margin-bottom:10px" onclick="show('flash')">🗂 复习闪卡${dueFlash?`（今天 ${dueFlash} 张待复习）`:""}</button>
-      ${Object.keys(state.wrong).length?`<button class="btn ghost block" onclick="show('wrong')">❌ 攻克错题（${Object.keys(state.wrong).length} 道）</button>`:""}
-    </div>`;
+    <div class="disclaimer">⚠️ 题目以模拟题为主，用于巩固知识点。税率、法条等请以当年官方教材为准；如有官方真题，可在“添加题目”录入并标注为真题。</div>`;
 }
 
-/* ============ 刷题 ============ */
+/* ===================== 章节刷题 ===================== */
 function renderQuizStart(){
-  $("#view-quiz").innerHTML = `
-    <div class="card">
-      <h2>选择刷题科目</h2>
-      <div class="subj-bar" id="quizSubj"></div>
-      <button class="btn block" onclick="startQuiz('${curSubject}')">🚀 开始刷题</button>
-      <div class="hint">做完每题立刻显示答案和解析；做错的题会自动进入「错题本」。</div>
-    </div>`;
-  renderSubjBar("quizSubj");
+  $("#view-quiz").innerHTML=`<div class="card"><h2>选择刷题科目</h2>
+    <div class="subj-bar" id="quizSubj"></div>
+    <button class="btn block" onclick="startQuiz(curSubject)">🚀 开始刷题</button>
+    <div class="hint">点击答案立即判对错并显示完整解析；做错的题自动进入「章节错题本」。</div></div>`;
+  renderSubjBar("quizSubj",()=>{});
 }
-function renderSubjBar(containerId){
-  const c = $("#"+containerId);
-  c.innerHTML = Object.keys(SUBJECTS).map(k=>{
-    const cnt = allQuestions().filter(q=>q.subject===k).length;
-    return `<button class="${k===curSubject?'active':''}" onclick="curSubject='${k}';renderSubjBar('${containerId}')">${SUBJECTS[k].short}<br><small style="opacity:.7">${cnt}题</small></button>`;
+function renderSubjBar(id,after){
+  const c=$("#"+id);
+  c.innerHTML=Object.keys(SUBJECTS).map(k=>{
+    const cnt=allQuestions().filter(q=>q.subject===k).length;
+    return `<button class="${k===curSubject?'active':''}" onclick="curSubject='${k}';renderSubjBar('${id}')">${SUBJECTS[k].short}<br><small style="opacity:.7">${cnt}题</small></button>`;
   }).join("");
 }
 function startQuiz(subj){
-  curSubject = subj;
-  quizPool = allQuestions().filter(q=>q.subject===subj);
-  if(!quizPool.length){ toast("该科目暂无题目，去「添加题目」录入吧"); return; }
-  // 打乱
-  quizPool = quizPool.sort(()=>Math.random()-0.5);
-  quizIdx = 0; quizMode="all";
-  markStudyToday(); saveState();
-  renderQuestion();
+  curSubject=subj; quizScope="chapter";
+  quizPool=allQuestions().filter(q=>q.subject===subj).sort(()=>Math.random()-.5);
+  if(!quizPool.length){toast("该科目暂无题目");return;}
+  quizIdx=0; runStat={correct:0,total:0}; markStudyToday(); saveState(); renderQuestion();
 }
-let curSelection = null; // single/judge: 字母; multi: 数组
-function renderQuestion(){
-  if(quizIdx>=quizPool.length){ renderQuizDone(); return; }
-  const q = quizPool[quizIdx];
-  curSelection = (q.type==="multi") ? [] : null;
+
+/* ===================== 套题试卷 ===================== */
+function renderPaperList(){
+  $("#view-paper").innerHTML=`<div class="card"><h2>📋 套题 / 试卷</h2>
+    <div class="subj-bar" id="paperSubj"></div>
+    <div id="paperList"></div>
+    <div class="disclaimer">套题做错的题进入独立的「套题错题本」，与章节错题分开统计。</div></div>`;
+  renderPaperSubj();
+}
+function renderPaperSubj(){
+  $("#paperSubj").innerHTML=Object.keys(SUBJECTS).map(k=>{
+    const n=PAPERS.filter(p=>p.subject===k).length;
+    return `<button class="${k===curSubject?'active':''}" onclick="curSubject='${k}';renderPaperSubj()">${SUBJECTS[k].short}<br><small style="opacity:.7">${n}套</small></button>`;
+  }).join("");
+  const list=PAPERS.filter(p=>p.subject===curSubject);
+  $("#paperList").innerHTML = list.length? list.map(p=>{
+    const d=state.paperDone[p.id];
+    return `<div class="paper-item" onclick="startPaper('${p.id}')">
+      <div class="pi-main"><div class="pi-title">${escapeHtml(p.title)} ${srcTag(p.src)}</div>
+      <div class="pi-sub">${p.questions.length} 题 ${d?`· 上次得分 ${d.score}/${d.total}`:"· 未做"}</div></div>
+      <span style="color:var(--primary)">开始 ›</span></div>`;
+  }).join("") : `<div class="empty">该科暂无套题</div>`;
+}
+function startPaper(pid){
+  const p=PAPERS.find(x=>x.id===pid); if(!p)return;
+  curPaperId=pid; quizScope="paper"; curSubject=p.subject;
+  quizPool=p.questions.map(q=>({...q,subject:p.subject,src:p.src}));
+  quizIdx=0; runStat={correct:0,total:0}; markStudyToday(); saveState();
+  views.forEach(x=>$("#view-"+x).hidden=(x!=="paper"));
+  renderQuestion("paper");
+}
+
+/* ===================== 通用做题渲染（章节 & 套题共用）===================== */
+function renderQuestion(targetView){
+  const view = targetView || (quizScope==="paper"?"paper":"quiz");
+  const host = $("#view-"+view);
+  if(quizIdx>=quizPool.length){ renderDone(view); return; }
+  const q=quizPool[quizIdx];
+  curSelection=(q.type==="multi")?[]:null;
   const keys=["A","B","C","D","E","F"];
   const typeName={single:"单选题",multi:"多选题",judge:"判断题"}[q.type];
-  $("#view-quiz").innerHTML = `
-    <div class="card">
-      <div class="q-meta">
-        <span class="tag">${SUBJECTS[q.subject].short}</span>
-        <span class="tag">${typeName}</span>
-        ${q.chapter?`<span class="tag">${q.chapter}</span>`:""}
-        <span style="margin-left:auto;color:var(--muted)">${quizIdx+1} / ${quizPool.length}</span>
-      </div>
-      <div class="q-stem">${escapeHtml(q.stem)}</div>
-      <div id="opts">${q.options.map((o,i)=>`
-        <div class="opt" data-key="${keys[i]}" onclick="pick('${keys[i]}','${q.type}')">
-          <span class="key">${keys[i]}</span><span>${escapeHtml(o)}</span>
-        </div>`).join("")}</div>
-      <div id="explainBox"></div>
-      <div class="q-actions">
-        <button class="btn" id="submitBtn" onclick='submitAnswer()'>提交答案</button>
-        <button class="btn ghost" id="nextBtn" onclick="quizIdx++;renderQuestion()" hidden>下一题 →</button>
-        <button class="btn ghost sm" onclick="show('quiz')">退出</button>
-      </div>
-    </div>`;
+  host.innerHTML=`<div class="card">
+    <div class="q-meta">
+      <span class="tag">${SUBJECTS[q.subject].short}</span>
+      <span class="tag">${typeName}</span>
+      ${srcTag(q.src)} ${levelTag(q.level)}
+      ${q.chapter?`<span class="tag">${escapeHtml(q.chapter)}</span>`:""}
+      ${q.point?`<span class="tag">${escapeHtml(q.point)}</span>`:""}
+      <span style="margin-left:auto;color:var(--muted)">${quizIdx+1}/${quizPool.length}</span>
+    </div>
+    <div class="q-stem">${escapeHtml(q.stem)}</div>
+    <div id="opts">${q.options.map((o,i)=>`<div class="opt" data-key="${keys[i]}" onclick="pick('${keys[i]}','${q.type}')">
+      <span class="key">${keys[i]}</span><span>${escapeHtml(o)}</span></div>`).join("")}</div>
+    <div id="explainBox"></div>
+    <div class="q-actions">
+      <button class="btn" id="submitBtn" onclick="submitAnswer('${view}')">提交答案</button>
+      <button class="btn ghost" id="nextBtn" onclick="quizIdx++;renderQuestion('${view}')" hidden>下一题 →</button>
+      <button class="btn ghost sm" onclick="show('${quizScope==='paper'?'paper':'quiz'}')">退出</button>
+    </div></div>`;
 }
 function pick(key,type){
-  if($("#submitBtn").hidden) return; // 已提交不可改
-  if(type==="multi"){
-    const i=curSelection.indexOf(key);
-    if(i>=0)curSelection.splice(i,1); else curSelection.push(key);
-  }else{
-    curSelection = key;
-  }
+  if($("#submitBtn").hidden)return;
+  if(type==="multi"){ const i=curSelection.indexOf(key); if(i>=0)curSelection.splice(i,1); else curSelection.push(key); }
+  else curSelection=key;
   document.querySelectorAll("#opts .opt").forEach(el=>{
-    const k=el.dataset.key;
-    const on = type==="multi" ? curSelection.includes(k) : curSelection===k;
-    el.classList.toggle("sel", on);
+    const k=el.dataset.key, on=type==="multi"?curSelection.includes(k):curSelection===k;
+    el.classList.toggle("sel",on);
   });
 }
-function submitAnswer(){
+function submitAnswer(view){
   const q=quizPool[quizIdx];
-  if((q.type==="multi" && !curSelection.length) || (q.type!=="multi" && !curSelection)){ toast("请先选择答案"); return; }
+  if((q.type==="multi"&&!curSelection.length)||(q.type!=="multi"&&!curSelection)){toast("请先选择答案");return;}
   let correct;
-  if(q.type==="multi"){
-    const a=[...q.answer].sort().join(""), s=[...curSelection].sort().join("");
-    correct = a===s;
-  }else correct = curSelection===q.answer;
+  if(q.type==="multi"){ correct=[...q.answer].sort().join("")===[...curSelection].sort().join(""); }
+  else correct=curSelection===q.answer;
 
   state.answered++; if(correct)state.correct++;
-  const ans = q.type==="multi"?q.answer:[q.answer];
+  runStat.total++; if(correct)runStat.correct++;
+  const ans=q.type==="multi"?q.answer:[q.answer];
   document.querySelectorAll("#opts .opt").forEach(el=>{
     const k=el.dataset.key;
     if(ans.includes(k))el.classList.add("correct");
     else if((q.type==="multi"?curSelection:[curSelection]).includes(k))el.classList.add("wrong");
   });
-  if(correct){ delete state.wrong[q.id]; }
-  else{ state.wrong[q.id]=(state.wrong[q.id]||0)+1; }
+
+  const map = quizScope==="paper"?state.wrongPaper:state.wrong;
+  if(correct){ delete map[q.id]; }
+  else{
+    const rec=map[q.id]||{c:0,added:todayStr()};
+    rec.c++; rec.last=todayStr(); if(!rec.added)rec.added=todayStr();
+    map[q.id]=rec;
+  }
   saveState();
 
-  const ansStr = q.type==="multi"?q.answer.join("、"):q.answer;
-  $("#explainBox").innerHTML = `<div class="explain">
+  const ansStr=q.type==="multi"?q.answer.join("、"):q.answer;
+  $("#explainBox").innerHTML=`<div class="explain">
     <div class="res ${correct?'ok':'no'}">${correct?'✅ 回答正确':'❌ 回答错误'}　正确答案：${ansStr}</div>
     ${escapeHtml(q.explain||"（暂无解析）")}</div>`;
-  $("#submitBtn").hidden=true;
-  $("#nextBtn").hidden=false;
+  $("#submitBtn").hidden=true; $("#nextBtn").hidden=false;
 }
-function renderQuizDone(){
-  $("#view-quiz").innerHTML=`<div class="card" style="text-align:center">
-    <h2>🎉 本轮刷题完成！</h2>
-    <p style="color:var(--muted)">坚持就是胜利，错题已自动收录，记得去攻克。</p>
-    <button class="btn block" style="margin-top:10px" onclick="startQuiz('${curSubject}')">🔁 再刷一轮</button>
-    <button class="btn ghost block" style="margin-top:10px" onclick="show('wrong')">❌ 去看错题本</button>
-    <button class="btn ghost block" style="margin-top:10px" onclick="show('home')">🏠 回首页</button>
-  </div>`;
+function renderDone(view){
+  const host=$("#view-"+view);
+  if(quizScope==="paper"&&curPaperId){
+    state.paperDone[curPaperId]={score:runStat.correct,total:runStat.total,date:todayStr()}; saveState();
+  }
+  const pct=runStat.total?Math.round(runStat.correct/runStat.total*100):0;
+  host.innerHTML=`<div class="card" style="text-align:center">
+    <h2>🎉 ${quizScope==="paper"?"本套试卷完成！":"本轮刷题完成！"}</h2>
+    <div class="stat" style="max-width:200px;margin:10px auto"><div class="num">${runStat.correct}/${runStat.total}</div><div class="lbl">本次得分 · 正确率 ${pct}%</div></div>
+    <p style="color:var(--muted)">做错的题已收入${quizScope==="paper"?"「套题错题本」":"「章节错题本」"}。</p>
+    <button class="btn block" style="margin-top:8px" onclick="show('wrong')">❌ 去看错题本</button>
+    <button class="btn ghost block" style="margin-top:10px" onclick="show('${quizScope==='paper'?'paper':'quiz'}')">${quizScope==='paper'?'选其他套题':'再刷一轮'}</button>
+    <button class="btn ghost block" style="margin-top:10px" onclick="show('home')">🏠 回首页</button></div>`;
 }
 
-/* ============ 错题本 ============ */
+/* ===================== 错题本（章节 / 套题 分开）===================== */
+let wrongTab="chapter";
 function renderWrong(){
-  const ids=Object.keys(state.wrong);
-  if(!ids.length){ $("#view-wrong").innerHTML=`<div class="card empty">🎊 太棒了，暂无错题！<br>继续保持～</div>`; return; }
+  const cN=Object.keys(state.wrong).length, pN=Object.keys(state.wrongPaper).length;
   $("#view-wrong").innerHTML=`
     <div class="card">
-      <h2>❌ 错题本（${ids.length} 道）</h2>
-      <div class="hint">把错题重做一遍，做对后自动移出错题本。</div>
-      <button class="btn block" style="margin-top:12px" onclick="startWrongQuiz()">🔁 重做全部错题</button>
-    </div>
-    ${ids.map(id=>{const q=getQ(id); if(!q)return""; return `
-      <div class="card">
-        <div class="q-meta"><span class="tag">${SUBJECTS[q.subject].short}</span><span class="tag">错 ${state.wrong[id]} 次</span>${q.chapter?`<span class="tag">${q.chapter}</span>`:""}</div>
+      <div class="seg">
+        <button class="${wrongTab==='chapter'?'active':''}" onclick="wrongTab='chapter';renderWrong()">章节错题 (${cN})</button>
+        <button class="${wrongTab==='paper'?'active':''}" onclick="wrongTab='paper';renderWrong()">套题错题 (${pN})</button>
+      </div>
+      <div id="wrongBody"></div>
+    </div>`;
+  const map = wrongTab==="chapter"?state.wrong:state.wrongPaper;
+  const ids=Object.keys(map);
+  const body=$("#wrongBody");
+  if(!ids.length){ body.innerHTML=`<div class="empty">🎊 暂无${wrongTab==='chapter'?'章节':'套题'}错题，继续保持！</div>`; return; }
+  body.innerHTML=`
+    <button class="btn block" style="margin-bottom:14px" onclick="startWrongQuiz('${wrongTab}')">🔁 重做全部${wrongTab==='chapter'?'章节':'套题'}错题（${ids.length}）</button>
+    ${ids.map(id=>{const q=getQ(id);if(!q)return"";const rec=map[id];
+      const since=rec.added||todayStr(); const dd=daysSince(since);
+      const urgent=dd>=URGE_DAYS && !chapterStudiedAfter(q.subject,q.chapter,since);
+      return `<div class="card" style="${urgent?'border:1.5px solid #f3b4b1':''}">
+        <div class="q-meta"><span class="tag">${SUBJECTS[q.subject].short}</span>${srcTag(q.src)}${levelTag(q.level)}
+          ${q.chapter?`<span class="tag">${escapeHtml(q.chapter)}</span>`:""}
+          <span class="tag">错 ${rec.c} 次</span>
+          ${urgent?`<span class="tag zhongdian">⏰ ${dd}天未学</span>`:""}</div>
         <div style="font-size:15px;font-weight:600">${escapeHtml(q.stem)}</div>
-        <div class="explain" style="margin-top:10px"><b>答案：</b>${q.type==='multi'?q.answer.join('、'):q.answer}<br>${escapeHtml(q.explain||'')}</div>
+        <div class="explain" style="margin-top:10px"><b>正确答案：</b>${q.type==='multi'?q.answer.join('、'):q.answer}<br>${escapeHtml(q.explain||'')}</div>
       </div>`;}).join("")}`;
 }
-function startWrongQuiz(){
-  quizPool = Object.keys(state.wrong).map(getQ).filter(Boolean).sort(()=>Math.random()-0.5);
+function startWrongQuiz(tab){
+  const map=tab==="chapter"?state.wrong:state.wrongPaper;
+  quizScope = tab==="chapter"?"chapter":"paper";
+  curPaperId=null;
+  quizPool=Object.keys(map).map(getQ).filter(Boolean).map(q=>({...q})).sort(()=>Math.random()-.5);
   if(!quizPool.length){toast("没有错题");return;}
-  quizIdx=0; markStudyToday(); saveState();
-  views.forEach(x=>$("#view-"+x).hidden=(x!=="quiz"));
-  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view==="quiz"));
-  renderQuestion();
+  quizIdx=0; runStat={correct:0,total:0}; markStudyToday(); saveState();
+  const view = tab==="chapter"?"quiz":"paper";
+  views.forEach(x=>$("#view-"+x).hidden=(x!==view));
+  renderQuestion(view);
 }
 
-/* ============ 闪卡（艾宾浩斯间隔复习）============ */
-const FLASH_INTERVALS=[1,2,4,7,15,30]; // 天
-function flashDueCount(){
-  return FLASHCARDS.filter((_,i)=>{
-    const s=state.flashSched[i];
-    return !s || s.due<=todayStr();
-  }).length;
-}
-let flashQueue=[], flashPos=0, flashFlipped=false;
+/* ===================== 闪卡 ===================== */
+const FLASH_INTERVALS=[1,2,4,7,15,30];
+function flashDueCount(){ return FLASHCARDS.filter((_,i)=>{const s=state.flashSched[i];return !s||s.due<=todayStr();}).length; }
+let flashQueue=[],flashPos=0,flashFlipped=false;
 function renderFlash(){
-  flashQueue = FLASHCARDS.map((c,i)=>({...c,_i:i})).filter(c=>{
-    const s=state.flashSched[c._i]; return !s || s.due<=todayStr();
-  });
-  flashPos=0; flashFlipped=false;
-  if(!flashQueue.length){
-    $("#view-flash").innerHTML=`<div class="card empty">✅ 今天的闪卡都复习完啦！<br>明天再来按遗忘曲线巩固吧～</div>`;
-    return;
-  }
+  flashQueue=FLASHCARDS.map((c,i)=>({...c,_i:i})).filter(c=>{const s=state.flashSched[c._i];return !s||s.due<=todayStr();});
+  flashPos=0;flashFlipped=false;
+  if(!flashQueue.length){$("#view-flash").innerHTML=`<div class="card empty">✅ 今天的闪卡都复习完啦！<br>明天再按遗忘曲线巩固～</div>`;return;}
   drawFlash();
 }
 function drawFlash(){
-  if(flashPos>=flashQueue.length){
-    $("#view-flash").innerHTML=`<div class="card empty">🎉 本轮闪卡复习完成！<br><button class="btn" style="margin-top:14px" onclick="show('home')">回首页</button></div>`;
-    return;
-  }
+  if(flashPos>=flashQueue.length){$("#view-flash").innerHTML=`<div class="card empty">🎉 本轮闪卡复习完成！<br><button class="btn" style="margin-top:14px" onclick="show('home')">回首页</button></div>`;return;}
   const c=flashQueue[flashPos];
-  $("#view-flash").innerHTML=`
-    <div class="card">
-      <div class="q-meta"><span class="tag">${SUBJECTS[c.subject].short}</span><span style="margin-left:auto;color:var(--muted)">${flashPos+1}/${flashQueue.length}</span></div>
-      <div class="flash" onclick="flipFlash()">
-        <small>${flashFlipped?'答案':'点击卡片查看答案'}</small>
-        <div>${escapeHtml(c.q)}</div>
-        ${flashFlipped?`<div class="a">${escapeHtml(c.a)}</div>`:""}
-      </div>
-      ${flashFlipped?`
-      <div class="hint" style="text-align:center;margin-top:14px">这个知识点你掌握得怎么样？</div>
+  $("#view-flash").innerHTML=`<div class="card">
+    <div class="q-meta"><span class="tag">${SUBJECTS[c.subject].short}</span><span style="margin-left:auto;color:var(--muted)">${flashPos+1}/${flashQueue.length}</span></div>
+    <div class="flash" onclick="flipFlash()"><small>${flashFlipped?'答案':'点击卡片查看答案'}</small>
+      <div>${escapeHtml(c.q)}</div>${flashFlipped?`<div class="a">${escapeHtml(c.a)}</div>`:""}</div>
+    ${flashFlipped?`<div class="hint" style="text-align:center;margin-top:14px">掌握得怎么样？</div>
       <div class="grid2" style="margin-top:10px">
-        <button class="btn ghost" onclick="rateFlash(false)">😵 没记住（明天再来）</button>
-        <button class="btn" onclick="rateFlash(true)">😎 记住了（拉长间隔）</button>
-      </div>`:`
-      <button class="btn block" style="margin-top:14px" onclick="flipFlash()">翻看答案</button>`}
-    </div>`;
+        <button class="btn ghost" onclick="rateFlash(false)">😵 没记住</button>
+        <button class="btn" onclick="rateFlash(true)">😎 记住了</button></div>`
+      :`<button class="btn block" style="margin-top:14px" onclick="flipFlash()">翻看答案</button>`}</div>`;
 }
-function flipFlash(){ flashFlipped=true; drawFlash(); }
+function flipFlash(){flashFlipped=true;drawFlash();}
 function rateFlash(ok){
-  const c=flashQueue[flashPos];
-  let s=state.flashSched[c._i]||{level:0};
-  if(ok) s.level=Math.min(s.level+1,FLASH_INTERVALS.length-1); else s.level=0;
-  const d=new Date(); d.setDate(d.getDate()+FLASH_INTERVALS[s.level]);
-  s.due=d.toISOString().slice(0,10);
-  state.flashSched[c._i]=s;
-  markStudyToday(); saveState();
-  flashPos++; flashFlipped=false; drawFlash();
+  const c=flashQueue[flashPos]; let s=state.flashSched[c._i]||{level:0};
+  s.level=ok?Math.min(s.level+1,FLASH_INTERVALS.length-1):0;
+  const d=new Date();d.setDate(d.getDate()+FLASH_INTERVALS[s.level]); s.due=d.toISOString().slice(0,10);
+  state.flashSched[c._i]=s; markStudyToday(); saveState();
+  flashPos++;flashFlipped=false;drawFlash();
 }
 
-/* ============ 学习计划 ============ */
+/* ===================== 学习计划 ===================== */
 function renderPlan(){
-  $("#view-plan").innerHTML=`
-    <div class="card">
-      <h2>✅ 章节学习打卡</h2>
-      <div class="subj-bar" id="planSubj"></div>
-      <div id="planList"></div>
-    </div>`;
+  $("#view-plan").innerHTML=`<div class="card"><h2>✅ 章节学习打卡</h2>
+    <div class="subj-bar" id="planSubj"></div><div id="planList"></div>
+    <div class="hint">勾选已学完的章节。打卡会被错题“加强提示”用来判断你是否已复习。</div></div>`;
   renderPlanSubj();
 }
 function renderPlanSubj(){
@@ -531,126 +847,102 @@ function renderPlanSubj(){
     <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:4px">
       <span>已完成 ${done}/${chs.length} 章</span><span>${Math.round(done/chs.length*100)}%</span></div>
     <div class="progbar"><i style="width:${Math.round(done/chs.length*100)}%"></i></div>
-    ${chs.map((ch,i)=>{const key=curSubject+"_"+i;const d=state.plan[key];return `
-      <div class="chap ${d?'done':''}">
-        <input type="checkbox" id="${key}" ${d?'checked':''} onchange="togglePlan('${key}')">
-        <label for="${key}">${ch}</label>
-      </div>`;}).join("")}`;
+    ${chs.map((ch,i)=>{const key=curSubject+"_"+i,d=state.plan[key];return `<div class="chap ${d?'done':''}">
+      <input type="checkbox" id="${key}" ${d?'checked':''} onchange="togglePlan('${key}')">
+      <label for="${key}">${ch}</label></div>`;}).join("")}`;
 }
 function togglePlan(key){
-  if(state.plan[key])delete state.plan[key]; else {state.plan[key]=true; markStudyToday();}
+  if(state.plan[key]){ delete state.plan[key]; delete state.planDate[key]; }
+  else{ state.plan[key]=true; state.planDate[key]=todayStr(); markStudyToday(); }
   saveState(); renderPlanSubj();
 }
 
-/* ============ 添加题目 ============ */
+/* ===================== 添加题目 ===================== */
 function renderAdd(){
-  $("#view-add").innerHTML=`
-    <div class="card">
-      <h2>➕ 添加我自己的题目</h2>
-      <label class="fl">科目</label>
-      <select id="aSubj">${Object.keys(SUBJECTS).map(k=>`<option value="${k}">${SUBJECTS[k].name}</option>`).join("")}</select>
-      <label class="fl">题型</label>
-      <select id="aType" onchange="onTypeChange()">
-        <option value="single">单选题</option><option value="multi">多选题</option><option value="judge">判断题</option>
-      </select>
-      <label class="fl">所属章节（选填）</label>
-      <input type="text" id="aChap" placeholder="如：第2章 存货">
-      <label class="fl">题干</label>
-      <textarea id="aStem" placeholder="输入题目内容…"></textarea>
-      <div id="aOptWrap">
-        <label class="fl">选项（每行一个）</label>
-        <textarea id="aOpts" placeholder="选项A&#10;选项B&#10;选项C&#10;选项D"></textarea>
-      </div>
-      <label class="fl">正确答案</label>
-      <input type="text" id="aAns" placeholder="单选填字母如 A；多选填如 ABD；判断填 A(正确)或B(错误)">
-      <label class="fl">答案解析（选填）</label>
-      <textarea id="aExp" placeholder="为什么选这个答案…"></textarea>
-      <button class="btn block" style="margin-top:16px" onclick="addQuestion()">💾 保存题目</button>
-      <div class="hint">已添加 ${state.custom.length} 道自定义题目。题目保存在本设备浏览器中。</div>
-    </div>`;
+  $("#view-add").innerHTML=`<div class="card"><h2>➕ 添加我自己的题目</h2>
+    <label class="fl">科目</label>
+    <select id="aSubj">${Object.keys(SUBJECTS).map(k=>`<option value="${k}">${SUBJECTS[k].name}</option>`).join("")}</select>
+    <label class="fl">所属章节</label>
+    <select id="aChap"></select>
+    <label class="fl">题型</label>
+    <select id="aType" onchange="onTypeChange()"><option value="single">单选题</option><option value="multi">多选题</option><option value="judge">判断题</option></select>
+    <div class="grid2">
+      <div><label class="fl">来源</label><select id="aSrc"><option value="模拟题">模拟题</option><option value="真题">真题</option></select></div>
+      <div><label class="fl">重要程度</label><select id="aLevel"><option value="重点">重点</option><option value="难点">难点</option><option value="一般">一般</option></select></div>
+    </div>
+    <label class="fl">知识点（用于错题分析，如“存货跌价准备”）</label>
+    <input type="text" id="aPoint" placeholder="选填，建议填写">
+    <label class="fl">题干</label>
+    <textarea id="aStem" placeholder="输入题目内容…"></textarea>
+    <div id="aOptWrap"><label class="fl">选项（每行一个）</label><textarea id="aOpts" placeholder="选项A&#10;选项B&#10;选项C&#10;选项D"></textarea></div>
+    <label class="fl">正确答案</label>
+    <input type="text" id="aAns" placeholder="单选填A；多选填ABD；判断A=正确/B=错误">
+    <label class="fl">答案解析</label>
+    <textarea id="aExp" placeholder="为什么选这个答案…"></textarea>
+    <button class="btn block" style="margin-top:16px" onclick="addQuestion()">💾 保存题目</button>
+    <div class="hint">已添加 ${state.custom.length} 道自定义题目，保存在本设备。</div></div>`;
+  fillChapSelect(); onTypeChange();
+  $("#aSubj").onchange=fillChapSelect;
+}
+function fillChapSelect(){
+  const s=$("#aSubj").value;
+  $("#aChap").innerHTML=PLAN_CHAPTERS[s].map(c=>`<option value="${c}">${c}</option>`).join("");
 }
 function onTypeChange(){
   const t=$("#aType").value;
-  $("#aOptWrap").style.display = t==="judge"?"none":"block";
-  $("#aAns").placeholder = t==="single"?"单选填一个字母，如 A"
-    : t==="multi"?"多选填多个字母，如 ABD"
-    : "判断题：A=正确，B=错误";
+  $("#aOptWrap").style.display=t==="judge"?"none":"block";
+  $("#aAns").placeholder=t==="single"?"单选填一个字母，如 A":t==="multi"?"多选填多个字母，如 ABD":"判断题：A=正确，B=错误";
 }
 function addQuestion(){
-  const subj=$("#aSubj").value, type=$("#aType").value;
-  const stem=$("#aStem").value.trim();
-  const exp=$("#aExp").value.trim();
-  const chap=$("#aChap").value.trim();
+  const subject=$("#aSubj").value,type=$("#aType").value,chapter=$("#aChap").value;
+  const src=$("#aSrc").value,level=$("#aLevel").value,point=$("#aPoint").value.trim();
+  const stem=$("#aStem").value.trim(),exp=$("#aExp").value.trim();
   let ansRaw=$("#aAns").value.trim().toUpperCase().replace(/[^A-F]/g,"");
   if(!stem){toast("请填写题干");return;}
   if(!ansRaw){toast("请填写正确答案");return;}
-  let options, answer;
-  if(type==="judge"){ options=["正确","错误"]; answer=ansRaw[0]; }
-  else{
-    options=$("#aOpts").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  let options,answer;
+  if(type==="judge"){options=["正确","错误"];answer=ansRaw[0];}
+  else{ options=$("#aOpts").value.split("\n").map(s=>s.trim()).filter(Boolean);
     if(options.length<2){toast("请至少填写2个选项");return;}
-    answer = type==="multi" ? ansRaw.split("") : ansRaw[0];
-  }
-  state.custom.push({id:"c"+Date.now(),subject:subj,chapter:chap,type,stem,options,answer,explain:exp});
-  saveState();
-  toast("✅ 已保存！");
-  renderAdd();
+    answer=type==="multi"?ansRaw.split(""):ansRaw[0]; }
+  state.custom.push({id:"c"+Date.now(),subject,chapter,point,src,level,type,stem,options,answer,explain:exp});
+  saveState(); toast("✅ 已保存！"); renderAdd();
 }
 
-/* ============ 数据备份 ============ */
+/* ===================== 数据备份 ===================== */
 function renderData(){
   $("#view-data").innerHTML=`
-    <div class="card">
-      <h2>⚙️ 数据备份与恢复</h2>
-      <p class="hint">你的学习记录、错题、自定义题目都存在本设备浏览器里。换设备或清理浏览器前，请先导出备份。</p>
+    <div class="card"><h2>⚙️ 数据备份与恢复</h2>
+      <p class="hint">学习记录、错题、自定义题目都存在本设备浏览器里。换设备或清缓存前请先导出备份。</p>
       <button class="btn block" style="margin-bottom:10px" onclick="exportData()">📤 导出备份文件</button>
-      <label class="btn ghost block" style="margin-bottom:10px;text-align:center">📥 导入备份文件
-        <input type="file" accept=".json" style="display:none" onchange="importData(event)">
-      </label>
-      <button class="btn ghost block" style="color:var(--err)" onclick="resetData()">🗑 清空所有数据</button>
-    </div>
-    <div class="card">
-      <h2>📊 学习统计</h2>
+      <label class="btn ghost block" style="margin-bottom:10px;text-align:center">📥 导入备份文件<input type="file" accept=".json" style="display:none" onchange="importData(event)"></label>
+      <button class="btn ghost block" style="color:var(--err)" onclick="resetData()">🗑 清空所有数据</button></div>
+    <div class="card"><h2>📊 学习统计</h2>
       <div class="row">
         <div class="stat"><div class="num">${state.answered}</div><div class="lbl">累计做题</div></div>
         <div class="stat"><div class="num">${state.answered?Math.round(state.correct/state.answered*100):0}%</div><div class="lbl">正确率</div></div>
-        <div class="stat"><div class="num">${state.studyDays.length}</div><div class="lbl">学习总天数</div></div>
-        <div class="stat"><div class="num">${state.custom.length}</div><div class="lbl">自定义题目</div></div>
-      </div>
-    </div>`;
+        <div class="stat"><div class="num">${Object.keys(state.wrong).length}</div><div class="lbl">章节错题</div></div>
+        <div class="stat"><div class="num">${Object.keys(state.wrongPaper).length}</div><div class="lbl">套题错题</div></div>
+      </div></div>`;
 }
 function exportData(){
   const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="中级会计备考备份_"+todayStr()+".json";
-  a.click();
-  toast("已导出备份");
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download="中级会计备考备份_"+todayStr()+".json"; a.click(); toast("已导出备份");
 }
 function importData(e){
-  const f=e.target.files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{ try{ state=JSON.parse(r.result); saveState(); toast("✅ 导入成功"); refreshCountdown(); show('home'); }catch(err){ toast("文件格式错误"); } };
+  const f=e.target.files[0]; if(!f)return; const r=new FileReader();
+  r.onload=()=>{try{state=JSON.parse(r.result);saveState();toast("✅ 导入成功");refreshCountdown();show('home');}catch(err){toast("文件格式错误");}};
   r.readAsText(f);
 }
-function resetData(){
-  if(confirm("确定清空所有学习数据吗？此操作不可恢复！建议先导出备份。")){
-    localStorage.removeItem(LS_KEY); location.reload();
-  }
-}
+function resetData(){ if(confirm("确定清空所有学习数据吗？此操作不可恢复！建议先导出备份。")){localStorage.removeItem(LS_KEY);location.reload();} }
 
-/* ============ 考试日期弹窗 ============ */
-$("#countdown").onclick=()=>{ $("#examDate").value=state.examDate; $("#modal").classList.add("show"); };
-function closeModal(){ $("#modal").classList.remove("show"); }
-function saveExamDate(){
-  const v=$("#examDate").value; if(!v)return;
-  state.examDate=v; saveState(); refreshCountdown(); closeModal(); toast("已更新考试日期");
-  if(!$("#view-home").hidden)renderHome();
-}
+/* ===================== 考试日期 ===================== */
+$("#countdown").onclick=()=>{$("#examDate").value=state.examDate;$("#modal").classList.add("show");};
+function closeModal(){$("#modal").classList.remove("show");}
+function saveExamDate(){const v=$("#examDate").value;if(!v)return;state.examDate=v;saveState();refreshCountdown();closeModal();toast("已更新考试日期");if(!$("#view-home").hidden)renderHome();}
 
-function escapeHtml(s){ return (s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
-
-/* ============ 启动 ============ */
+/* ===================== 启动 ===================== */
 refreshCountdown();
 renderHome();
 </script>
